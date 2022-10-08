@@ -10,7 +10,7 @@ public class Frame0 extends JFrame implements ActionListener {
     JButton button2;
     public Frame0(){
         this.setSize(800,500);
-        this.setTitle("Elect");
+        this.setTitle("Admin Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -46,9 +46,9 @@ public class Frame0 extends JFrame implements ActionListener {
         button0.setText("Candidate Registration");
         button0.setFocusable(false);
         button0.setContentAreaFilled(false);
-        button0.setOpaque(true);
-        button0.setFont(new Font("Calibri",Font.PLAIN,17));
-        button0.setBounds(180,230,200,50);
+        button0.setOpaque(false);
+        button0.setFont(new Font("Calibri",Font.BOLD,17));
+        button0.setBounds(170,230,210,50);
         button0.setBorder(new RoundedBorder(20));
         button0.addActionListener(this);
 
@@ -56,9 +56,9 @@ public class Frame0 extends JFrame implements ActionListener {
         button1.setText("Start Election");
         button1.setFocusable(false);
         button1.setContentAreaFilled(false);
-        button1.setOpaque(true);
-        button1.setFont(new Font("Calibri",Font.PLAIN,17));
-        button1.setBounds(420,230,200,50);
+        button1.setOpaque(false);
+        button1.setFont(new Font("Calibri",Font.BOLD,17));
+        button1.setBounds(420,230,210,50);
         button1.setBorder(new RoundedBorder(20));
         button1.addActionListener(this);
 
@@ -66,9 +66,9 @@ public class Frame0 extends JFrame implements ActionListener {
         button2.setText("View Result");
         button2.setFocusable(false);
         button2.setContentAreaFilled(false);
-        button2.setOpaque(true);
-        button2.setFont(new Font("Calibri",Font.PLAIN,17));
-        button2.setBounds(300,314,200,50);
+        button2.setOpaque(false);
+        button2.setFont(new Font("Calibri",Font.BOLD,17));
+        button2.setBounds(295,314,210,50);
         button2.setBorder(new RoundedBorder(20));
         button2.addActionListener(this);
 
@@ -84,15 +84,16 @@ public class Frame0 extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
           if(e.getSource() == button0){
               button0.setEnabled(false);
-              System.out.println("Button 0");
+              this.dispose();
+              Frame1 frame1 = new Frame1();
           }
           else if(e.getSource() == button1){
               button1.setEnabled(false);
-              System.out.println("Button 1");
+              this.dispose();
           }
           else if(e.getSource() == button2){
               button2.setEnabled(false);
-              System.out.println("Button 2");
+              this.dispose();
           }
     }
 }
