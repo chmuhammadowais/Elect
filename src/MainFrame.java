@@ -7,6 +7,11 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton cand_mgmt_btn;
     JButton start_btn;
     JButton result_btn;
+    ImageIcon icon;
+    ImageIcon header_icon;
+    JLabel elect_heading;
+    JLabel welcome_title;
+    JPanel upper_line;
     public MainFrame(){
         this.setSize(800,500);
         this.setTitle("Admin Panel");
@@ -15,12 +20,12 @@ public class MainFrame extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(Color.white);
-        ImageIcon icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("logo.png");
         this.setIconImage(icon.getImage());
 
 
-        ImageIcon header_icon = new ImageIcon("heading.png");
-        JLabel elect_heading = new JLabel();
+        header_icon = new ImageIcon("heading.png");
+        elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
         elect_heading.setIcon(header_icon);
@@ -30,13 +35,13 @@ public class MainFrame extends JFrame implements ActionListener {
         //elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
         elect_heading.setBounds(365,0,70,100);
 
-        JLabel welcome_title = new JLabel();
+        welcome_title  = new JLabel();
         welcome_title.setText("Welcome to Elect! Let's get started.");
         welcome_title.setFont(new Font("Calibri",Font.BOLD,20));
         //welcome_title.setBorder(BorderFactory.createLineBorder(Color.red));
         welcome_title.setBounds(250,130,300,60);
 
-        JPanel upper_line = new JPanel();
+        upper_line= new JPanel();
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 

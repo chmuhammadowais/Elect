@@ -11,10 +11,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 public class RegistrationFrame extends JFrame implements ActionListener {
+JLabel elect_heading;
+ImageIcon icon;
+ImageIcon header_icon;
+JLabel reg_title;
 JButton reg_btn;
-JButton back_btn;
+    JPanel upper_line;
+    JPanel bottom_line;
+    JButton back_btn;
+JPanel pic_panel;
 JButton pic_chooser_btn;
 JLabel pic_path_label;
+JLabel pic_panel_def_pic;
+ImageIcon avatar;
+ImageIcon back_icon;
+JLabel st_id;
+JTextField st_id_textfield;
+JLabel st_name;
+JTextField st_name_textfield;
+JLabel st_email;
+JTextField st_email_textfield;
 
     public RegistrationFrame(){
         this.setSize(800,500);
@@ -24,11 +40,11 @@ JLabel pic_path_label;
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(Color.white);
-        ImageIcon icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("logo.png");
         this.setIconImage(icon.getImage());
 
-        ImageIcon header_icon = new ImageIcon("heading.png");
-        JLabel elect_heading = new JLabel();
+        header_icon = new ImageIcon("heading.png");
+        elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
         elect_heading.setIcon(header_icon);
@@ -38,20 +54,20 @@ JLabel pic_path_label;
         //elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
         elect_heading.setBounds(365,0,70,100);
 
-        JLabel reg_title = new JLabel();
+        reg_title = new JLabel();
         reg_title.setText("Candidate Registration Panel");
         reg_title.setFont(new Font("Calibri",Font.BOLD,20));
        // reg_title.setBorder(BorderFactory.createLineBorder(Color.red));
         reg_title.setBounds(274,130,248,60);
 
-        JPanel upper_line = new JPanel();
+        upper_line = new JPanel();
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        ImageIcon avatar = new ImageIcon("avatar.png");
-        JPanel pic_panel = new JPanel();
+        avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        pic_panel = new JPanel();
         pic_panel.setLayout(null);
-        JLabel pic_panel_def_pic = new JLabel();
+        pic_panel_def_pic = new JLabel();
         pic_panel_def_pic.setIcon(avatar);
         pic_panel_def_pic.setBounds(0,0,150,150);
         pic_panel.add(pic_panel_def_pic);
@@ -60,7 +76,7 @@ JLabel pic_path_label;
         pic_panel.setBorder(new RoundedBorder(10));
         pic_panel.setBounds(125,230,150,150);
 
-        JLabel st_id = new JLabel();
+        st_id= new JLabel();
         st_id.setText("Student ID");
         st_id.setFont(new Font("Calibri",Font.BOLD,18));
         //st_id.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -68,12 +84,12 @@ JLabel pic_path_label;
         JPanel st_id_line= new JPanel();
         st_id_line.setBounds(325,250,350,3);
         st_id_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
-        JTextField st_id_textfield = new JTextField();
+        st_id_textfield = new JTextField();
         st_id_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_id_textfield.setBorder(null);
         st_id_textfield.setBounds(410,230,265,20);
 
-        JLabel st_name = new JLabel();
+        st_name = new JLabel();
         st_name.setText("Student Name");
         st_name.setFont(new Font("Calibri",Font.BOLD,18));
         //st_name.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -81,12 +97,12 @@ JLabel pic_path_label;
         JPanel st_name_line= new JPanel();
         st_name_line.setBounds(325,310,350,3);
         st_name_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
-        JTextField st_name_textfield = new JTextField();
+        st_name_textfield = new JTextField();
         st_name_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_name_textfield.setBorder(null);
         st_name_textfield.setBounds(440,290,235,20);
 
-        JLabel st_email = new JLabel();
+        st_email = new JLabel();
         st_email.setText("Student Email");
         st_email.setFont(new Font("Calibri",Font.BOLD,18));
         //st_email.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -94,13 +110,12 @@ JLabel pic_path_label;
         JPanel st_email_line = new JPanel();
         st_email_line.setBounds(325,370,350,3);
         st_email_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
-        JTextField st_email_textfield = new JTextField();
+        st_email_textfield = new JTextField();
         st_email_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_email_textfield.setBorder(null);
         st_email_textfield.setBounds(435,350,240,20);
 
-
-        JPanel bottom_line = new JPanel();
+        bottom_line= new JPanel();
         bottom_line.setBounds(125,400,550,3);
         bottom_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
 
@@ -133,7 +148,7 @@ JLabel pic_path_label;
         pic_path_label.setBounds(125,385,150,15);
 
         back_btn = new JButton();
-        ImageIcon back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);
@@ -190,6 +205,8 @@ JLabel pic_path_label;
                 String path = f.getPath();
                 pic_path_label.setText(path);
                 //System.out.println(pic_path);
+                avatar = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+                pic_panel_def_pic.setIcon(avatar);
             }
 
         }
