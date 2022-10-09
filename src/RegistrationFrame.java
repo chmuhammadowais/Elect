@@ -1,12 +1,22 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.awt.Color;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+public class RegistrationFrame extends JFrame implements ActionListener {
+JButton reg_btn;
+JButton back_btn;
+JButton pic_chooser_btn;
+JLabel pic_path_label;
 
-public class Frame1 extends JFrame implements ActionListener {
-JButton submit;
-    public Frame1(){
+    public RegistrationFrame(){
         this.setSize(800,500);
         this.setTitle("Candidate Registration");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,7 +24,6 @@ JButton submit;
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(Color.white);
-        Border border = BorderFactory.createLineBorder(Color.red);
         ImageIcon icon = new ImageIcon("logo.png");
         this.setIconImage(icon.getImage());
 
@@ -26,13 +35,13 @@ JButton submit;
         elect_heading.setIconTextGap(4);
         elect_heading.setVerticalTextPosition(JLabel.BOTTOM);
         elect_heading.setHorizontalTextPosition(JLabel.CENTER);
-        //elect_heading.setBorder(border);
+        //elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
         elect_heading.setBounds(365,0,70,100);
 
         JLabel reg_title = new JLabel();
         reg_title.setText("Candidate Registration Panel");
         reg_title.setFont(new Font("Calibri",Font.BOLD,20));
-        //reg_title.setBorder(border);
+       // reg_title.setBorder(BorderFactory.createLineBorder(Color.red));
         reg_title.setBounds(274,130,248,60);
 
         JPanel upper_line = new JPanel();
@@ -54,7 +63,7 @@ JButton submit;
         JLabel st_id = new JLabel();
         st_id.setText("Student ID");
         st_id.setFont(new Font("Calibri",Font.BOLD,18));
-        //st_id.setBorder(border);
+        //st_id.setBorder(BorderFactory.createLineBorder(Color.red));
         st_id.setBounds(325,230,85,20);
         JPanel st_id_line= new JPanel();
         st_id_line.setBounds(325,250,350,3);
@@ -67,7 +76,7 @@ JButton submit;
         JLabel st_name = new JLabel();
         st_name.setText("Student Name");
         st_name.setFont(new Font("Calibri",Font.BOLD,18));
-        //st_name.setBorder(border);
+        //st_name.setBorder(BorderFactory.createLineBorder(Color.red));
         st_name.setBounds(325,290,115,20);
         JPanel st_name_line= new JPanel();
         st_name_line.setBounds(325,310,350,3);
@@ -80,7 +89,7 @@ JButton submit;
         JLabel st_email = new JLabel();
         st_email.setText("Student Email");
         st_email.setFont(new Font("Calibri",Font.BOLD,18));
-        //st_email.setBorder(border);
+        //st_email.setBorder(BorderFactory.createLineBorder(Color.red));
         st_email.setBounds(325,350,110,20);
         JPanel st_email_line = new JPanel();
         st_email_line.setBounds(325,370,350,3);
@@ -95,14 +104,45 @@ JButton submit;
         bottom_line.setBounds(125,400,550,3);
         bottom_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
 
-        submit = new JButton();
-        submit.setText("Register");
-        submit.setFocusable(false);
-        submit.setContentAreaFilled(false);
-        submit.setOpaque(false);
-        submit.setFont(new Font("Calibri",Font.BOLD,17));
-        submit.setBounds(300,410,200,30);
-        submit.setBorder(new RoundedBorder(20));
+        reg_btn = new JButton();
+        reg_btn.setText("Register");
+        reg_btn.setFocusable(false);
+        reg_btn.setContentAreaFilled(false);
+        reg_btn.setOpaque(false);
+        reg_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        reg_btn.setBounds(475,410,200,30);
+        reg_btn.setBorder(new RoundedBorder(20));
+        reg_btn.addActionListener(this);
+
+        pic_chooser_btn = new JButton();
+        pic_chooser_btn.setText("Choose Picture");
+        pic_chooser_btn.setFocusable(false);
+        pic_chooser_btn.setContentAreaFilled(false);
+        pic_chooser_btn.setOpaque(false);
+        pic_chooser_btn.setFont(new Font("Calibri",Font.BOLD,12));
+        pic_chooser_btn.setVerticalTextPosition(JButton.CENTER);
+        pic_chooser_btn.setHorizontalTextPosition(JButton.CENTER);
+        pic_chooser_btn.setBounds(150,400,100,17);
+        pic_chooser_btn.setBorder(new RoundedBorder(10));
+        pic_chooser_btn.addActionListener(this);
+
+        pic_path_label = new JLabel();
+        pic_path_label.setText(null);
+        pic_path_label.setFont(new Font("Calibri",Font.PLAIN,12));
+        //pic_path_label.setBorder(BorderFactory.createLineBorder(Color.red));
+        pic_path_label.setBounds(125,385,150,15);
+
+        back_btn = new JButton();
+        ImageIcon back_icon = new ImageIcon("back.png");
+        back_btn.setIcon(back_icon);
+        back_btn.setFocusable(false);
+        back_btn.setContentAreaFilled(false);
+        back_btn.setOpaque(false);
+        back_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        back_btn.setBounds(30,410,30,30);
+        back_btn.setBorder(null);
+        back_btn.addActionListener(this);
+
 
         this.add(elect_heading);
         this.add(reg_title);
@@ -118,14 +158,44 @@ JButton submit;
         this.add(st_email_line);
         this.add(st_email_textfield);
         //this.add(bottom_line);
-        this.add(submit);
+        this.add(reg_btn);
+        this.add(pic_chooser_btn);
+        this.add(pic_path_label);
+        this.add(back_btn);
         this.setVisible(true);
-    }
 
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == submit){
+        if(e.getSource() == reg_btn){
+                    try {
 
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+            System.out.println("Connection succeed");
+
+
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        }
+        else if(e.getSource() == pic_chooser_btn){
+            JFileChooser file = new JFileChooser();
+            file.setMultiSelectionEnabled(true);
+            file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            file.setFileHidingEnabled(false);
+            if (file.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                java.io.File f = file.getSelectedFile();
+                String path = f.getPath();
+                pic_path_label.setText(path);
+                //System.out.println(pic_path);
+            }
+
+        }
+        else if(e.getSource() == back_btn){
+            this.dispose();
+            new MainFrame();
         }
     }
 }
