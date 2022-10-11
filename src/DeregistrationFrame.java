@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class DeregistrationFrame extends JFrame implements ActionListener {
     JLabel elect_heading;
@@ -17,6 +18,9 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
     JPanel pic_panel;
     ImageIcon avatar;
     JLabel pic_panel_def_pic;
+    JButton dereg_conf;
+    JFrame confirmation_frame;
+
     public DeregistrationFrame(){
         this.setSize(800,500);
         this.setTitle("Candidate Registration");
@@ -111,10 +115,145 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == dereg_btn){
+            String id = st_id_textfield.getText();
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+                System.out.println("Connection succeed");
+                PreparedStatement ps0 = con.prepareStatement("select * from TestB where ID = ?");
+                ps0.setInt(1, Integer.parseInt(id));
+                ResultSet rs = ps0.executeQuery();
+                rs.next();
+                Blob blob = rs.getBlob("Picture");
 
+                ImageIcon image = new ImageIcon(blob.getBytes(1, (int)blob.length()));
+
+                String st_id = rs.getString("ID");
+                String st_name = rs.getString("Name");
+                String st_email = rs.getString("Email");
+                ImageIcon imgThisImg = new ImageIcon(new ImageIcon(image.getImage()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+
+
+                confirmation_frame = new JFrame();
+                confirmation_frame.setSize(650,300);
+                confirmation_frame.getContentPane().setBackground(Color.white);
+                confirmation_frame.setLayout(null);
+                confirmation_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                confirmation_frame.setLocationRelativeTo(null);
+                ImageIcon bin = new ImageIcon("bin.png");
+                dereg_conf = new JButton();
+                dereg_conf.setIcon(bin);
+                dereg_conf.setFocusable(false);
+                dereg_conf.setContentAreaFilled(false);
+                dereg_conf.setOpaque(false);
+                dereg_conf.setFont(new Font("Calibri",Font.BOLD,17));
+                dereg_conf.setBounds(475,410,200,30);
+                dereg_conf.setBorder(null);
+                dereg_conf.addActionListener(this);
+                dereg_conf.setBounds(570,225,30,30);
+
+                JPanel conf_pic_panel = new JPanel();
+                conf_pic_panel.setLayout(null);
+                conf_pic_panel.setBounds(50, 60, 150, 150);
+                JLabel conf_pic_panel_pic = new JLabel();
+                conf_pic_panel_pic.setBounds(0,0,150,150);
+                conf_pic_panel_pic.setIcon(new ImageIcon(imgThisImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
+                conf_pic_panel_pic.setSize(150,150);
+                conf_pic_panel.add(conf_pic_panel_pic);
+                conf_pic_panel.setFocusable(false);
+                conf_pic_panel.setOpaque(true);
+                conf_pic_panel.setBorder(new RoundedBorder(10));
+                JLabel title = new JLabel();
+                title.setText("Are you sure you want to deregister the candidate?");
+                title.setFont(new Font("Calibri",Font.BOLD,18));
+                //title.setBorder(BorderFactory.createLineBorder(Color.red));
+                title.setBounds(130, 0, 390, 20);
+                JLabel conf_st_id= new JLabel();
+                conf_st_id.setText("Student ID");
+                conf_st_id.setFont(new Font("Calibri",Font.BOLD,18));
+                conf_st_id.setBounds(250,60,85,20);
+                JTextField conf_st_id_textfield = new JTextField();
+                conf_st_id_textfield.setBackground(null);
+                conf_st_id_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
+                conf_st_id_textfield.setBorder(null);
+                conf_st_id_textfield.setText(st_id);
+                conf_st_id_textfield.setEditable(false);
+                conf_st_id_textfield.setBounds(335,60,265,20);
+                JPanel conf_st_id_line= new JPanel();
+                conf_st_id_line.setBounds(250,80,350,3);
+                conf_st_id_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
+
+                JLabel conf_st_name = new JLabel();
+                conf_st_name.setText("Student Name");
+                conf_st_name.setFont(new Font("Calibri",Font.BOLD,18));
+                //conf_st_name.setBorder(BorderFactory.createLineBorder(Color.red));
+                conf_st_name.setBounds(250,120,115,20);
+                JTextField conf_st_name_textfield = new JTextField();
+                conf_st_name_textfield.setBackground(null);
+                conf_st_name_textfield.setText(st_name);
+                conf_st_name_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
+                conf_st_name_textfield.setBorder(null);
+                conf_st_name_textfield.setBounds(365,120,235,20);
+                JPanel conf_st_name_line= new JPanel();
+                conf_st_name_line.setBounds(250,140,350,3);
+                conf_st_name_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
+
+
+                JLabel conf_st_email = new JLabel();
+                conf_st_email.setText("Student Email");
+                conf_st_email.setFont(new Font("Calibri",Font.BOLD,18));
+                //conf_st_email.setBorder(BorderFactory.createLineBorder(Color.red));
+                conf_st_email.setBounds(250,180,110,20);
+                JTextField conf_st_email_textfield = new JTextField();
+                conf_st_email_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
+                conf_st_email_textfield.setBackground(null);
+                conf_st_email_textfield.setText(st_email);
+                conf_st_email_textfield.setBorder(null);
+                conf_st_email_textfield.setBounds(360,180,240,20);
+                JPanel conf_st_email_line = new JPanel();
+                conf_st_email_line.setBounds(250,200,350,3);
+                conf_st_email_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
+
+
+                confirmation_frame.add(title);
+                confirmation_frame.add(dereg_conf);
+                confirmation_frame.add(conf_pic_panel);
+                confirmation_frame.add(conf_st_id);
+                confirmation_frame.add(conf_st_id_textfield);
+                confirmation_frame.add(conf_st_id_line);
+                confirmation_frame.add(conf_st_name);
+                confirmation_frame.add(conf_st_name_textfield);
+                confirmation_frame.add(conf_st_name_line);
+                confirmation_frame.add(conf_st_email_textfield);
+                confirmation_frame.add(conf_st_email);
+                confirmation_frame.add(conf_st_email_line);
+                confirmation_frame.setVisible(true);
+
+                System.out.println("Query execution successful");
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
+            }
         } else if (e.getSource() == back_btn) {
             this.dispose();
             new RegDeregFrame();
+        }
+        else if(e.getSource() == dereg_conf){
+            try {
+                confirmation_frame.dispose();
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+                System.out.println("Connection succeed");
+                String id = st_id_textfield.getText();
+                PreparedStatement ps1 = con.prepareStatement("delete from TestB where ID = ?");
+                ps1.setInt(1, Integer.parseInt(id));
+                ps1.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Candidate Deregistered");
+                System.out.println("Query execution successful");
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
+            }
         }
     }
 }

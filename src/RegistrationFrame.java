@@ -2,9 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.awt.Color;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -185,14 +189,41 @@ JTextField st_email_textfield;
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
             System.out.println("Connection succeed");
-                System.out.println(st_id_textfield.getText());
-                System.out.println(st_name_textfield.getText());
-                System.out.println(st_email_textfield.getText());
+            String id = st_id_textfield.getText();
+            String name = st_name_textfield.getText();
+            String email = st_email_textfield.getText();
+
+                PreparedStatement ps = con.prepareStatement("insert into TestB values(?,?,?,?)");
+                ps.setInt(1, Integer.parseInt(id));
+                ps.setString(2,name);
+                ps.setString(3,email);
+                FileInputStream fis;
+
+                if(pic_path_label != null){
+                     fis = new FileInputStream(pic_path_label.getText());
+
+                }
+                else{
+                     fis = new FileInputStream("avatar.png");
+                }
+
+                ps.setBinaryStream(4 ,fis, fis.available());
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Information stored successfully", "Operation Successful",JOptionPane.INFORMATION_MESSAGE);
 
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
-        }
+
+            } catch (ClassNotFoundException | SQLException | IOException ex) {
+                System.out.println(ex);
+            }
+            avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+            pic_panel_def_pic.setIcon(avatar);
+            pic_path_label.setText(null);
+            st_id_textfield.setText(null);
+            st_name_textfield.setText(null);
+            st_email_textfield.setText(null);
+
         }
         else if(e.getSource() == pic_chooser_btn){
             JFileChooser file = new JFileChooser();
