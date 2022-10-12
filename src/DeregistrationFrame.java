@@ -135,6 +135,9 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
 
 
                 confirmation_frame = new JFrame();
+                confirmation_frame.setTitle("Confirmation");
+                ImageIcon logo = new ImageIcon("logo.png");
+                confirmation_frame.setIconImage(logo.getImage());
                 confirmation_frame.setSize(650,300);
                 confirmation_frame.getContentPane().setBackground(Color.white);
                 confirmation_frame.setLayout(null);
@@ -249,6 +252,7 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
                 ps1.setInt(1, Integer.parseInt(id));
                 ps1.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Candidate Deregistered");
+                st_id_textfield.setText(null);
                 System.out.println("Query execution successful");
 
             } catch (ClassNotFoundException | SQLException ex) {

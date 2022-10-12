@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame implements ActionListener {
     JButton cand_mgmt_btn;
-    JButton start_btn;
+    JButton elec_start_btn;
     JButton result_btn;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -55,15 +55,15 @@ public class MainFrame extends JFrame implements ActionListener {
         cand_mgmt_btn.setBorder(new RoundedBorder(20));
         cand_mgmt_btn.addActionListener(this);
 
-        start_btn = new JButton();
-        start_btn.setText("Start Election");
-        start_btn.setFocusable(false);
-        start_btn.setContentAreaFilled(false);
-        start_btn.setOpaque(false);
-        start_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        start_btn.setBounds(420,230,210,50);
-        start_btn.setBorder(new RoundedBorder(20));
-        start_btn.addActionListener(this);
+        elec_start_btn = new JButton();
+        elec_start_btn.setText("Start Election");
+        elec_start_btn.setFocusable(false);
+        elec_start_btn.setContentAreaFilled(false);
+        elec_start_btn.setOpaque(false);
+        elec_start_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        elec_start_btn.setBounds(420,230,210,50);
+        elec_start_btn.setBorder(new RoundedBorder(20));
+        elec_start_btn.addActionListener(this);
 
         result_btn = new JButton();
         result_btn.setText("View Result");
@@ -80,7 +80,7 @@ public class MainFrame extends JFrame implements ActionListener {
         this.add(welcome_title);
         this.add(upper_line);
         this.add(cand_mgmt_btn);
-        this.add(start_btn);
+        this.add(elec_start_btn);
         this.add(result_btn);
         this.setVisible(true);
     }
@@ -90,9 +90,10 @@ public class MainFrame extends JFrame implements ActionListener {
               this.dispose();
               new RegDeregFrame();
           }
-          else if(e.getSource() == start_btn){
+          else if(e.getSource() == elec_start_btn){
               this.dispose();
-              start_btn.setEnabled(false);
+              new ElectionFrame();
+              elec_start_btn.setEnabled(false);
           }
           else if(e.getSource() == result_btn){
               this.dispose();
