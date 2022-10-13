@@ -95,16 +95,16 @@ public class RegDeregFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == reg_btn){
-            this.dispose();
             new RegistrationFrame();
+            this.dispose();
         }
         else if(e.getSource() == dereg_btn){
-            this.dispose();
             new DeregistrationFrame();
+            this.dispose();
         }
         else if(e.getSource() == back_btn){
-            this.dispose();
             new MainFrame();
+            this.dispose();
         }
     }
 }

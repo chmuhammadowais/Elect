@@ -117,8 +117,9 @@ public class ElectionFrame extends JFrame implements ActionListener {
             System.out.println(time);
         }
         else if(e.getSource() == back_btn){
-            this.dispose();
             new MainFrame();
+            this.dispose();
+
         }
     }
 }

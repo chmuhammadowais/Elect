@@ -235,11 +235,12 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
                 System.out.println("Query execution successful");
 
             } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println(ex);
+                throw new RuntimeException(ex);
             }
         } else if (e.getSource() == back_btn) {
-            this.dispose();
             new RegDeregFrame();
+            this.dispose();
+
         }
         else if(e.getSource() == dereg_conf){
             try {
@@ -256,7 +257,7 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
                 System.out.println("Query execution successful");
 
             } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println(ex);
+                throw new RuntimeException(ex);
             }
         }
     }

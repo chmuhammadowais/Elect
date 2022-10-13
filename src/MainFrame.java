@@ -7,6 +7,7 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton cand_mgmt_btn;
     JButton elec_start_btn;
     JButton result_btn;
+    JButton adm_signup;
     ImageIcon icon;
     ImageIcon header_icon;
     JLabel elect_heading;
@@ -61,7 +62,7 @@ public class MainFrame extends JFrame implements ActionListener {
         elec_start_btn.setContentAreaFilled(false);
         elec_start_btn.setOpaque(false);
         elec_start_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        elec_start_btn.setBounds(420,230,210,50);
+        elec_start_btn.setBounds(420,230,215,50);
         elec_start_btn.setBorder(new RoundedBorder(20));
         elec_start_btn.addActionListener(this);
 
@@ -71,9 +72,19 @@ public class MainFrame extends JFrame implements ActionListener {
         result_btn.setContentAreaFilled(false);
         result_btn.setOpaque(false);
         result_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        result_btn.setBounds(295,314,210,50);
+        result_btn.setBounds(165,314,215,50);
         result_btn.setBorder(new RoundedBorder(20));
         result_btn.addActionListener(this);
+
+        adm_signup = new JButton();
+        adm_signup.setText("Admin Signup");
+        adm_signup.setFocusable(false);
+        adm_signup.setContentAreaFilled(false);
+        adm_signup.setOpaque(false);
+        adm_signup.setFont(new Font("Calibri",Font.BOLD,17));
+        adm_signup.setBounds(420,314,215,50);
+        adm_signup.setBorder(new RoundedBorder(20));
+        adm_signup.addActionListener(this);
 
 
         this.add(elect_heading);
@@ -82,6 +93,7 @@ public class MainFrame extends JFrame implements ActionListener {
         this.add(cand_mgmt_btn);
         this.add(elec_start_btn);
         this.add(result_btn);
+        this.add(adm_signup);
         this.setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
@@ -98,6 +110,10 @@ public class MainFrame extends JFrame implements ActionListener {
           else if(e.getSource() == result_btn){
               this.dispose();
               result_btn.setEnabled(false);
+          }
+          else if(e.getSource() == adm_signup){
+              new AdminSignup();
+              this.dispose();
           }
     }
 }

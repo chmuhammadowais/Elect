@@ -4,12 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class AdminLogin extends JFrame implements ActionListener {
+public class AdminSignup extends JFrame implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
-    JLabel admin_login_title;
-    JButton login_btn;
+    JLabel admin_signup_title;
+    JButton sign_up_btn;
+    JButton back_btn;
     JPanel upper_line;
     JPanel pic_panel;
     JLabel pic_panel_def_pic;
@@ -19,9 +20,9 @@ public class AdminLogin extends JFrame implements ActionListener {
     JLabel admin_password;
     JTextField admin_password_textfield;
 
-    public AdminLogin() {
+    public AdminSignup() {
         this.setSize(800, 500);
-        this.setTitle("Admin Login");
+        this.setTitle("Admin Signup");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -41,17 +42,17 @@ public class AdminLogin extends JFrame implements ActionListener {
         //elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
         elect_heading.setBounds(365, 0, 70, 100);
 
-        admin_login_title = new JLabel();
-        admin_login_title.setText("Admin Login Panel");
-        admin_login_title.setFont(new Font("Calibri", Font.BOLD, 20));
+        admin_signup_title = new JLabel();
+        admin_signup_title.setText("Admin Signup Panel");
+        admin_signup_title.setFont(new Font("Calibri", Font.BOLD, 20));
         //admin_login_title.setBorder(BorderFactory.createLineBorder(Color.red));
-        admin_login_title.setBounds(320, 130, 160, 60);
+        admin_signup_title.setBounds(315, 130, 170, 60);
 
         upper_line = new JPanel();
         upper_line.setBounds(100, 210, 600, 3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon(new ImageIcon("lock.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        avatar = new ImageIcon(new ImageIcon("signup.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         pic_panel = new JPanel();
         pic_panel.setLayout(null);
         pic_panel_def_pic = new JLabel();
@@ -93,19 +94,30 @@ public class AdminLogin extends JFrame implements ActionListener {
         admin_password_textfield.setHorizontalAlignment(JTextField.CENTER);
         admin_password_textfield.setBounds(405, 310, 270, 20);
 
-        login_btn = new JButton();
-        login_btn.setText("Login");
-        login_btn.setFocusable(false);
-        login_btn.setContentAreaFilled(false);
-        login_btn.setOpaque(false);
-        login_btn.setFont(new Font("Calibri", Font.BOLD, 17));
-        login_btn.setBounds(400, 400, 200, 30);
-        login_btn.setBorder(new RoundedBorder(20));
-        login_btn.addActionListener(this);
+        back_btn = new JButton();
+        ImageIcon back_icon = new ImageIcon("back.png");
+        back_btn.setIcon(back_icon);
+        back_btn.setFocusable(false);
+        back_btn.setContentAreaFilled(false);
+        back_btn.setOpaque(false);
+        back_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        back_btn.setBounds(30,410,30,30);
+        back_btn.setBorder(null);
+        back_btn.addActionListener(this);
+
+        sign_up_btn = new JButton();
+        sign_up_btn.setText("Signup");
+        sign_up_btn.setFocusable(false);
+        sign_up_btn.setContentAreaFilled(false);
+        sign_up_btn.setOpaque(false);
+        sign_up_btn.setFont(new Font("Calibri", Font.BOLD, 17));
+        sign_up_btn.setBounds(400, 400, 200, 30);
+        sign_up_btn.setBorder(new RoundedBorder(20));
+        sign_up_btn.addActionListener(this);
 
 
         this.add(elect_heading);
-        this.add(admin_login_title);
+        this.add(admin_signup_title);
         this.add(upper_line);
         this.add(pic_panel);
         this.add(admin_username);
@@ -114,41 +126,40 @@ public class AdminLogin extends JFrame implements ActionListener {
         this.add(admin_password);
         this.add(admin_password_line);
         this.add(admin_password_textfield);
-        this.add(login_btn);
+        this.add(sign_up_btn);
+        this.add(back_btn);
         this.setVisible(true);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == login_btn) {
+        if (e.getSource() == sign_up_btn) {
             try {
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
-                String username_textfieldText = admin_username_textfield.getText();
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+                System.out.println("Connection succeed");
+                String admin_username = admin_username_textfield.getText();
+                String admin_password = admin_password_textfield.getText();
 
-                PreparedStatement ps = con.prepareStatement("select Username, Password from Admin where Username=?");
-                try {
-                    ps.setString(1, username_textfieldText);
-                    ResultSet rs = ps.executeQuery();
-                    rs.next();
-                        String username = rs.getString("Username");
-                        String password = rs.getString("Password");
+                PreparedStatement ps = con.prepareStatement("insert into Admin values(?,?)");
+                ps.setString(1, admin_username);
+                ps.setString(2,admin_password);
 
-                    if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
-                        new MainFrame();
-                        this.dispose();
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Invalid Credentials", "Error",JOptionPane.ERROR_MESSAGE);
-                    }
+                ps.executeUpdate();
 
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            } catch (SQLException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Administrator Registered", "Operation Successful",JOptionPane.INFORMATION_MESSAGE);
+                admin_username_textfield.setText(null);
+                admin_password_textfield.setText(null);
+
+            } catch (ClassNotFoundException | SQLException ex) {
                 throw new RuntimeException(ex);
             }
         }
+        else if(e.getSource() == back_btn){
+            new MainFrame();
+            this.dispose();
+           // new MainFrame();
+        }
     }
 }
-

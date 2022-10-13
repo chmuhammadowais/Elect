@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.awt.Color;
@@ -215,7 +214,7 @@ JTextField st_email_textfield;
 
 
             } catch (ClassNotFoundException | SQLException | IOException ex) {
-                System.out.println(ex);
+                throw new RuntimeException(ex);
             }
             avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
             pic_panel_def_pic.setIcon(avatar);
