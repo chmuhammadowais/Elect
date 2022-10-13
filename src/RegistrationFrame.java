@@ -91,7 +91,8 @@ JTextField st_email_textfield;
         st_id_textfield = new JTextField();
         st_id_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_id_textfield.setBorder(null);
-        st_id_textfield.setBounds(410,230,265,20);
+        st_id_textfield.setHorizontalAlignment(JTextField.CENTER);
+        st_id_textfield.setBounds(440,230,235,20);
 
         st_name = new JLabel();
         st_name.setText("Student Name");
@@ -104,6 +105,7 @@ JTextField st_email_textfield;
         st_name_textfield = new JTextField();
         st_name_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_name_textfield.setBorder(null);
+        st_name_textfield.setHorizontalAlignment(JTextField.CENTER);
         st_name_textfield.setBounds(440,290,235,20);
 
         st_email = new JLabel();
@@ -117,7 +119,8 @@ JTextField st_email_textfield;
         st_email_textfield = new JTextField();
         st_email_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_email_textfield.setBorder(null);
-        st_email_textfield.setBounds(435,350,240,20);
+        st_email_textfield.setHorizontalAlignment(JTextField.CENTER);
+        st_email_textfield.setBounds(440,350,235,20);
 
         reg_btn = new JButton();
         reg_btn.setText("Register");

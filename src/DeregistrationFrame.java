@@ -64,6 +64,7 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
         st_id_textfield = new JTextField();
         st_id_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
         st_id_textfield.setBorder(null);
+        st_id_textfield.setHorizontalAlignment(JTextField.CENTER);
         st_id_textfield.setBounds(410,290,265,20);
 
         dereg_btn = new JButton();

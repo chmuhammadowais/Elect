@@ -61,6 +61,7 @@ public class ElectionFrame extends JFrame implements ActionListener {
     time_span_textfield = new JTextField();
     time_span_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
     time_span_textfield.setBorder(null);
+    time_span_textfield.setHorizontalAlignment(JTextField.CENTER);
     time_span_textfield.setBounds(410,290,265,20);
 
     set_time_btn = new JButton();
