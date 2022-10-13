@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class AdminSignup extends JFrame implements ActionListener {
+public class AdminDelete extends JFrame implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
-    JLabel admin_signup_title;
-    JButton sign_up_btn;
+    JLabel admin_delete_title;
+    JButton delete_btn;
     JButton back_btn;
     JPanel upper_line;
     JPanel pic_panel;
@@ -19,10 +19,9 @@ public class AdminSignup extends JFrame implements ActionListener {
     JTextField admin_username_textfield;
     JLabel admin_password;
     JTextField admin_password_textfield;
-
-    public AdminSignup() {
+    public AdminDelete() {
         this.setSize(800, 500);
-        this.setTitle("Admin Signup Panel");
+        this.setTitle("Admin Deletion Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -42,17 +41,17 @@ public class AdminSignup extends JFrame implements ActionListener {
         //elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
         elect_heading.setBounds(365, 0, 70, 100);
 
-        admin_signup_title = new JLabel();
-        admin_signup_title.setText("Admin Signup Panel");
-        admin_signup_title.setFont(new Font("Calibri", Font.BOLD, 20));
-        //admin_login_title.setBorder(BorderFactory.createLineBorder(Color.red));
-        admin_signup_title.setBounds(315, 130, 170, 60);
+        admin_delete_title = new JLabel();
+        admin_delete_title.setText("Admin Deletion Panel");
+        admin_delete_title.setFont(new Font("Calibri", Font.BOLD, 20));
+        //admin_delete_title.setBorder(BorderFactory.createLineBorder(Color.red));
+        admin_delete_title.setBounds(306, 130, 188, 60);
 
         upper_line = new JPanel();
         upper_line.setBounds(100, 210, 600, 3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon(new ImageIcon("admin_add.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        avatar = new ImageIcon(new ImageIcon("admin_delete.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         pic_panel = new JPanel();
         pic_panel.setLayout(null);
         pic_panel_def_pic = new JLabel();
@@ -105,19 +104,19 @@ public class AdminSignup extends JFrame implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
-        sign_up_btn = new JButton();
-        sign_up_btn.setText("Signup");
-        sign_up_btn.setFocusable(false);
-        sign_up_btn.setContentAreaFilled(false);
-        sign_up_btn.setOpaque(false);
-        sign_up_btn.setFont(new Font("Calibri", Font.BOLD, 17));
-        sign_up_btn.setBounds(400, 400, 200, 30);
-        sign_up_btn.setBorder(new RoundedBorder(20));
-        sign_up_btn.addActionListener(this);
+        delete_btn = new JButton();
+        delete_btn.setText("Delete");
+        delete_btn.setFocusable(false);
+        delete_btn.setContentAreaFilled(false);
+        delete_btn.setOpaque(false);
+        delete_btn.setFont(new Font("Calibri", Font.BOLD, 17));
+        delete_btn.setBounds(400, 400, 200, 30);
+        delete_btn.setBorder(new RoundedBorder(20));
+        delete_btn.addActionListener(this);
 
 
         this.add(elect_heading);
-        this.add(admin_signup_title);
+        this.add(admin_delete_title);
         this.add(upper_line);
         this.add(pic_panel);
         this.add(admin_username);
@@ -126,34 +125,54 @@ public class AdminSignup extends JFrame implements ActionListener {
         this.add(admin_password);
         this.add(admin_password_line);
         this.add(admin_password_textfield);
-        this.add(sign_up_btn);
+        this.add(delete_btn);
         this.add(back_btn);
         this.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == sign_up_btn) {
+        if(e.getSource() == delete_btn){
             try {
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
-                System.out.println("Connection succeed");
-                String admin_username = admin_username_textfield.getText();
-                String admin_password = admin_password_textfield.getText();
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
+                String username_textfieldText = admin_username_textfield.getText();
 
-                PreparedStatement ps = con.prepareStatement("insert into Admin values(?,?)");
-                ps.setString(1, admin_username);
-                ps.setString(2,admin_password);
+                PreparedStatement ps0 = con.prepareStatement("select Username, Password from Admin where Username=?");
+                try {
+                    ps0.setString(1, username_textfieldText);
+                    ResultSet rs0 = ps0.executeQuery();
+                    rs0.next();
+                    String username = rs0.getString("Username");
+                    String password = rs0.getString("Password");
 
-                ps.executeUpdate();
+                    if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
+                        PreparedStatement ps1 = con.prepareStatement("delete from Admin where Username=?");
+                        try{
+                            ps1.setString(1,admin_username_textfield.getText());
+                            ps1.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Administrator deleted", "Success",JOptionPane.INFORMATION_MESSAGE);
+                            admin_username_textfield.setText(null);
+                            admin_password_textfield.setText(null);
 
-                JOptionPane.showMessageDialog(null, "Administrator Registered", "Operation Successful",JOptionPane.INFORMATION_MESSAGE);
-                admin_username_textfield.setText(null);
-                admin_password_textfield.setText(null);
+                        } catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(null, "Administrator Not Found", "Success",JOptionPane.ERROR_MESSAGE);
+                            System.out.println("Exception : "+ex);
+                        }
+                    }
 
-            } catch (ClassNotFoundException | SQLException ex) {
-                JOptionPane.showMessageDialog(null,"User already registered", "Error",JOptionPane.ERROR_MESSAGE);
+                    else if((admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password))){
+                        JOptionPane.showMessageDialog(null, "Invalid Credentials", "Success",JOptionPane.ERROR_MESSAGE);
+                    }
+
+
+
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Administrator Not Found ", "Success",JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Exception : "+ex);
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("Exception : "+ex);
             }
         }

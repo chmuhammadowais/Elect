@@ -77,7 +77,7 @@ public class MainFrame extends JFrame implements ActionListener {
         result_btn.addActionListener(this);
 
         adm_signup = new JButton();
-        adm_signup.setText("Admin Signup");
+        adm_signup.setText("Admin Signup / Delete");
         adm_signup.setFocusable(false);
         adm_signup.setContentAreaFilled(false);
         adm_signup.setOpaque(false);
@@ -100,7 +100,7 @@ public class MainFrame extends JFrame implements ActionListener {
           if(e.getSource() == cand_mgmt_btn){
               cand_mgmt_btn.setEnabled(false);
               this.dispose();
-              new RegDeregFrame();
+              new CandidateRegisterDeregister();
           }
           else if(e.getSource() == elec_start_btn){
               this.dispose();
@@ -112,7 +112,7 @@ public class MainFrame extends JFrame implements ActionListener {
               result_btn.setEnabled(false);
           }
           else if(e.getSource() == adm_signup){
-              new AdminSignup();
+              new AdminSignupDelete();
               this.dispose();
           }
     }

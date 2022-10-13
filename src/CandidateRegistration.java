@@ -13,7 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-public class RegistrationFrame extends JFrame implements ActionListener {
+public class CandidateRegistration extends JFrame implements ActionListener {
 JLabel elect_heading;
 ImageIcon icon;
 ImageIcon header_icon;
@@ -34,9 +34,9 @@ JTextField st_name_textfield;
 JLabel st_email;
 JTextField st_email_textfield;
 
-    public RegistrationFrame(){
+    public CandidateRegistration(){
         this.setSize(800,500);
-        this.setTitle("Candidate Registration");
+        this.setTitle("Candidate Registration Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -217,7 +217,7 @@ JTextField st_email_textfield;
 
 
             } catch (ClassNotFoundException | SQLException | IOException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Exception : "+ex);
             }
             avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
             pic_panel_def_pic.setIcon(avatar);
@@ -244,7 +244,7 @@ JTextField st_email_textfield;
         }
         else if(e.getSource() == back_btn){
             this.dispose();
-            new RegDeregFrame();
+            new CandidateRegisterDeregister();
         }
     }
 }

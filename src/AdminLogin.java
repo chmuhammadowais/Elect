@@ -138,15 +138,23 @@ public class AdminLogin extends JFrame implements ActionListener {
                         new MainFrame();
                         this.dispose();
                     }
+                    else if(admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password)){
+                        JOptionPane.showMessageDialog(null, "Invalid Password", "Error",JOptionPane.ERROR_MESSAGE);
+                    }
                     else{
                         JOptionPane.showMessageDialog(null, "Invalid Credentials", "Error",JOptionPane.ERROR_MESSAGE);
                     }
 
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    JOptionPane.showMessageDialog(null, "Invalid Credentials", "Error",JOptionPane.ERROR_MESSAGE);
+                    admin_username_textfield.setText(null);
+                    admin_password_textfield.setText(null);
+                    System.out.println("Exception : "+ex);
+
+
                 }
             } catch (SQLException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Exception : "+ex);
             }
         }
     }

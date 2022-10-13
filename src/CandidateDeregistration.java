@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class DeregistrationFrame extends JFrame implements ActionListener {
+public class CandidateDeregistration extends JFrame implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -21,9 +21,9 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
     JButton dereg_conf;
     JFrame confirmation_frame;
 
-    public DeregistrationFrame(){
+    public CandidateDeregistration(){
         this.setSize(800,500);
-        this.setTitle("Candidate Registration");
+        this.setTitle("Candidate Deregistration Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -236,10 +236,10 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
                 System.out.println("Query execution successful");
 
             } catch (ClassNotFoundException | SQLException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Exception : "+ex);
             }
         } else if (e.getSource() == back_btn) {
-            new RegDeregFrame();
+            new CandidateRegisterDeregister();
             this.dispose();
 
         }
@@ -258,7 +258,7 @@ public class DeregistrationFrame extends JFrame implements ActionListener {
                 System.out.println("Query execution successful");
 
             } catch (ClassNotFoundException | SQLException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Exception : "+ex);
             }
         }
     }
