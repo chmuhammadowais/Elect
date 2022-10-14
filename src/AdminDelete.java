@@ -132,46 +132,61 @@ public class AdminDelete extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == delete_btn){
+        if(e.getSource() == delete_btn) {
             try {
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
                 String username_textfieldText = admin_username_textfield.getText();
-
-                PreparedStatement ps0 = con.prepareStatement("select Username, Password from Admin where Username=?");
+                PreparedStatement ps0 = con.prepareStatement("select count(Username) as Counted from Admin");
                 try {
-                    ps0.setString(1, username_textfieldText);
                     ResultSet rs0 = ps0.executeQuery();
                     rs0.next();
-                    String username = rs0.getString("Username");
-                    String password = rs0.getString("Password");
+                    int counted_admins = rs0.getInt("Counted");
+                    if (counted_admins > 1) {
+                        PreparedStatement ps1 = con.prepareStatement("select Username, Password from Admin where Username=?");
+                        try {
+                            ps1.setString(1, username_textfieldText);
+                            ResultSet rs1 = ps1.executeQuery();
+                            rs1.next();
+                            String username = rs1.getString("Username");
+                            String password = rs1.getString("Password");
 
-                    if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
-                        PreparedStatement ps1 = con.prepareStatement("delete from Admin where Username=?");
-                        try{
-                            ps1.setString(1,admin_username_textfield.getText());
-                            ps1.executeUpdate();
-                            JOptionPane.showMessageDialog(null, "Administrator deleted", "Success",JOptionPane.INFORMATION_MESSAGE);
-                            admin_username_textfield.setText(null);
-                            admin_password_textfield.setText(null);
+                            if (admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)) {
+                                PreparedStatement ps2 = con.prepareStatement("delete from Admin where Username=?");
+                                try {
+                                    ps2.setString(1, admin_username_textfield.getText());
+                                    ps2.executeUpdate();
+                                    JOptionPane.showMessageDialog(null, "Administrator deleted", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                    admin_username_textfield.setText(null);
+                                    admin_password_textfield.setText(null);
+
+                                } catch (SQLException ex) {
+                                    JOptionPane.showMessageDialog(null, "Administrator Not Found", "Success", JOptionPane.ERROR_MESSAGE);
+                                    System.out.println("Exception : " + ex);
+                                }
+                            } else if ((admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password))) {
+                                JOptionPane.showMessageDialog(null, "Invalid Credentials", "Success", JOptionPane.ERROR_MESSAGE);
+                            }
+
 
                         } catch (SQLException ex) {
-                            JOptionPane.showMessageDialog(null, "Administrator Not Found", "Success",JOptionPane.ERROR_MESSAGE);
-                            System.out.println("Exception : "+ex);
+                            JOptionPane.showMessageDialog(null, "Administrator Not Found ", "Success", JOptionPane.ERROR_MESSAGE);
+                            System.out.println("Exception : " + ex);
                         }
+
                     }
-
-                    else if((admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password))){
-                        JOptionPane.showMessageDialog(null, "Invalid Credentials", "Success",JOptionPane.ERROR_MESSAGE);
+                    else if(counted_admins == 1){
+                        JOptionPane.showMessageDialog(null,"Cannot delete the only admin. You won't be able to log back into the system again.","Error",JOptionPane.ERROR_MESSAGE);
+                        admin_username_textfield.setText(null);
+                        admin_password_textfield.setText(null);
                     }
-
-
-
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Administrator Not Found ", "Success",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Database returned Error","Error",JOptionPane.ERROR_MESSAGE);
                     System.out.println("Exception : "+ex);
                 }
+
+
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("Exception : "+ex);
             }

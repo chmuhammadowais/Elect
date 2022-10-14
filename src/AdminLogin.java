@@ -18,8 +18,10 @@ public class AdminLogin extends JFrame implements ActionListener {
     JTextField admin_username_textfield;
     JLabel admin_password;
     JTextField admin_password_textfield;
+    String provoke;
 
-    public AdminLogin() {
+    public AdminLogin(String provoke) {
+        this.provoke = provoke;
         this.setSize(800, 500);
         this.setTitle("Admin Login");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -135,7 +137,13 @@ public class AdminLogin extends JFrame implements ActionListener {
                         String password = rs.getString("Password");
 
                     if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
-                        new MainFrame();
+                        if(this.provoke.equals("MainFrame")){
+                            new MainFrame();
+                        }
+                        else if(this.provoke.equals("AdminSignupDelete")){
+                            new AdminSignupDelete();
+                        }
+
                         this.dispose();
                     }
                     else if(admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password)){

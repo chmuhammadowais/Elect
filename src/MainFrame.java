@@ -7,7 +7,7 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton cand_mgmt_btn;
     JButton elec_start_btn;
     JButton result_btn;
-    JButton adm_signup;
+    JButton adm_signupdete_btn;
     ImageIcon icon;
     ImageIcon header_icon;
     JLabel elect_heading;
@@ -76,15 +76,15 @@ public class MainFrame extends JFrame implements ActionListener {
         result_btn.setBorder(new RoundedBorder(20));
         result_btn.addActionListener(this);
 
-        adm_signup = new JButton();
-        adm_signup.setText("Admin Signup / Delete");
-        adm_signup.setFocusable(false);
-        adm_signup.setContentAreaFilled(false);
-        adm_signup.setOpaque(false);
-        adm_signup.setFont(new Font("Calibri",Font.BOLD,17));
-        adm_signup.setBounds(420,314,215,50);
-        adm_signup.setBorder(new RoundedBorder(20));
-        adm_signup.addActionListener(this);
+        adm_signupdete_btn = new JButton();
+        adm_signupdete_btn.setText("Admin Signup / Delete");
+        adm_signupdete_btn.setFocusable(false);
+        adm_signupdete_btn.setContentAreaFilled(false);
+        adm_signupdete_btn.setOpaque(false);
+        adm_signupdete_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        adm_signupdete_btn.setBounds(420,314,215,50);
+        adm_signupdete_btn.setBorder(new RoundedBorder(20));
+        adm_signupdete_btn.addActionListener(this);
 
 
         this.add(elect_heading);
@@ -93,7 +93,7 @@ public class MainFrame extends JFrame implements ActionListener {
         this.add(cand_mgmt_btn);
         this.add(elec_start_btn);
         this.add(result_btn);
-        this.add(adm_signup);
+        this.add(adm_signupdete_btn);
         this.setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
@@ -111,8 +111,8 @@ public class MainFrame extends JFrame implements ActionListener {
               this.dispose();
               result_btn.setEnabled(false);
           }
-          else if(e.getSource() == adm_signup){
-              new AdminSignupDelete();
+          else if(e.getSource() == adm_signupdete_btn){
+              new AdminLogin("AdminSignupDelete");
               this.dispose();
           }
     }

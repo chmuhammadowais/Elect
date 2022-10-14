@@ -27,12 +27,12 @@ JLabel pic_path_label;
 JLabel pic_panel_def_pic;
 ImageIcon avatar;
 ImageIcon back_icon;
-JLabel st_id;
-JTextField st_id_textfield;
-JLabel st_name;
-JTextField st_name_textfield;
-JLabel st_email;
-JTextField st_email_textfield;
+JLabel user_id;
+JTextField user_id_textfield;
+JLabel user_name;
+JTextField user_name_textfield;
+JLabel user_standing_post;
+JTextField user_standing_post_textfield;
 
     public CandidateRegistration(){
         this.setSize(800,500);
@@ -80,47 +80,47 @@ JTextField st_email_textfield;
         pic_panel.setBorder(new RoundedBorder(10));
         pic_panel.setBounds(125,230,150,150);
 
-        st_id= new JLabel();
-        st_id.setText("Student ID");
-        st_id.setFont(new Font("Calibri",Font.BOLD,18));
-        //st_id.setBorder(BorderFactory.createLineBorder(Color.red));
-        st_id.setBounds(325,230,85,20);
-        JPanel st_id_line= new JPanel();
-        st_id_line.setBounds(325,250,350,3);
-        st_id_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
-        st_id_textfield = new JTextField();
-        st_id_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
-        st_id_textfield.setBorder(null);
-        st_id_textfield.setHorizontalAlignment(JTextField.CENTER);
-        st_id_textfield.setBounds(440,230,235,20);
+        user_id = new JLabel();
+        user_id.setText("User ID");
+        user_id.setFont(new Font("Calibri",Font.BOLD,18));
+       // user_id.setBorder(BorderFactory.createLineBorder(Color.red));
+        user_id.setBounds(325,230,85,20);
+        JPanel user_id_line= new JPanel();
+        user_id_line.setBounds(325,250,350,3);
+        user_id_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
+        user_id_textfield = new JTextField();
+        user_id_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
+        user_id_textfield.setBorder(null);
+        user_id_textfield.setHorizontalAlignment(JTextField.CENTER);
+        user_id_textfield.setBounds(410,230,265,20);
 
-        st_name = new JLabel();
-        st_name.setText("Student Name");
-        st_name.setFont(new Font("Calibri",Font.BOLD,18));
-        //st_name.setBorder(BorderFactory.createLineBorder(Color.red));
-        st_name.setBounds(325,290,115,20);
-        JPanel st_name_line= new JPanel();
-        st_name_line.setBounds(325,310,350,3);
-        st_name_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
-        st_name_textfield = new JTextField();
-        st_name_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
-        st_name_textfield.setBorder(null);
-        st_name_textfield.setHorizontalAlignment(JTextField.CENTER);
-        st_name_textfield.setBounds(440,290,235,20);
+        user_name = new JLabel();
+        user_name.setText("User Name");
+        user_name.setFont(new Font("Calibri",Font.BOLD,18));
+       // user_name.setBorder(BorderFactory.createLineBorder(Color.red));
+        user_name.setBounds(325,290,85,20);
+        JPanel user_name_line= new JPanel();
+        user_name_line.setBounds(325,310,350,3);
+        user_name_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
+        user_name_textfield = new JTextField();
+        user_name_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
+        user_name_textfield.setBorder(null);
+        user_name_textfield.setHorizontalAlignment(JTextField.CENTER);
+        user_name_textfield.setBounds(410,290,265,20);
 
-        st_email = new JLabel();
-        st_email.setText("Student Email");
-        st_email.setFont(new Font("Calibri",Font.BOLD,18));
-        //st_email.setBorder(BorderFactory.createLineBorder(Color.red));
-        st_email.setBounds(325,350,110,20);
-        JPanel st_email_line = new JPanel();
-        st_email_line.setBounds(325,370,350,3);
-        st_email_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
-        st_email_textfield = new JTextField();
-        st_email_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
-        st_email_textfield.setBorder(null);
-        st_email_textfield.setHorizontalAlignment(JTextField.CENTER);
-        st_email_textfield.setBounds(440,350,235,20);
+        user_standing_post = new JLabel();
+        user_standing_post.setText("Position");
+        user_standing_post.setFont(new Font("Calibri",Font.BOLD,18));
+       // user_standing_post.setBorder(BorderFactory.createLineBorder(Color.red));
+        user_standing_post.setBounds(325,350,85,20);
+        JPanel user_standing_post_line = new JPanel();
+        user_standing_post_line.setBounds(325,370,350,3);
+        user_standing_post_line.setBorder(BorderFactory.createLineBorder(Color.darkGray,3));
+        user_standing_post_textfield = new JTextField();
+        user_standing_post_textfield.setFont(new Font("Calibri",Font.PLAIN,15));
+        user_standing_post_textfield.setBorder(null);
+        user_standing_post_textfield.setHorizontalAlignment(JTextField.CENTER);
+        user_standing_post_textfield.setBounds(410,350,265,20);
 
         reg_btn = new JButton();
         reg_btn.setText("Register");
@@ -166,16 +166,15 @@ JTextField st_email_textfield;
         this.add(reg_title);
         this.add(upper_line);
         this.add(pic_panel);
-        this.add(st_id);
-        this.add(st_id_line);
-        this.add(st_id_textfield);
-        this.add(st_name);
-        this.add(st_name_line);
-        this.add(st_name_textfield);
-        this.add(st_email);
-        this.add(st_email_line);
-        this.add(st_email_textfield);
-        //this.add(bottom_line);
+        this.add(user_id);
+        this.add(user_id_line);
+        this.add(user_id_textfield);
+        this.add(user_name);
+        this.add(user_name_line);
+        this.add(user_name_textfield);
+        this.add(user_standing_post);
+        this.add(user_standing_post_line);
+        this.add(user_standing_post_textfield);
         this.add(reg_btn);
         this.add(pic_chooser_btn);
         this.add(pic_path_label);
@@ -191,24 +190,25 @@ JTextField st_email_textfield;
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
             System.out.println("Connection succeed");
-            String id = st_id_textfield.getText();
-            String name = st_name_textfield.getText();
-            String email = st_email_textfield.getText();
+            String id = user_id_textfield.getText();
+            String name = user_name_textfield.getText();
+            String email = user_standing_post_textfield.getText();
 
-                PreparedStatement ps = con.prepareStatement("insert into TestB values(?,?,?,?)");
+                PreparedStatement ps = con.prepareStatement("insert into Candidates values(?,?,?,?)");
                 ps.setInt(1, Integer.parseInt(id));
                 ps.setString(2,name);
                 ps.setString(3,email);
-                FileInputStream fis;
+                FileInputStream fis = null;
 
-                if(pic_path_label != null){
+                if(pic_path_label.getText() != null){
                      fis = new FileInputStream(pic_path_label.getText());
 
                 }
-                else{
+                else if(pic_path_label.getText() == null){
                      fis = new FileInputStream("avatar.png");
                 }
 
+                assert fis != null;
                 ps.setBinaryStream(4 ,fis, fis.available());
                 ps.executeUpdate();
 
@@ -217,14 +217,15 @@ JTextField st_email_textfield;
 
 
             } catch (ClassNotFoundException | SQLException | IOException ex) {
+                JOptionPane.showMessageDialog(null,"User ID not found in registered users list, Thus cannot be registered as a Candidate","Error",JOptionPane.ERROR_MESSAGE);
                 System.out.println("Exception : "+ex);
             }
             avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
             pic_panel_def_pic.setIcon(avatar);
             pic_path_label.setText(null);
-            st_id_textfield.setText(null);
-            st_name_textfield.setText(null);
-            st_email_textfield.setText(null);
+            user_id_textfield.setText(null);
+            user_name_textfield.setText(null);
+            user_standing_post_textfield.setText(null);
 
         }
         else if(e.getSource() == pic_chooser_btn){
@@ -236,7 +237,6 @@ JTextField st_email_textfield;
                 java.io.File f = file.getSelectedFile();
                 String path = f.getPath();
                 pic_path_label.setText(path);
-                //System.out.println(pic_path);
                 avatar = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
                 pic_panel_def_pic.setIcon(avatar);
             }
