@@ -100,7 +100,7 @@ public class MainFrame extends JFrame implements ActionListener {
           if(e.getSource() == cand_mgmt_btn){
               cand_mgmt_btn.setEnabled(false);
               this.dispose();
-              new CandidateRegisterDeregister();
+              new CandidatteManagement();
           }
           else if(e.getSource() == elec_start_btn){
               this.dispose();

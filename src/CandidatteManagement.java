@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CandidateRegisterDeregister extends JFrame implements ActionListener {
+public class CandidatteManagement extends JFrame implements ActionListener {
     JPanel upper_line;
     JButton reg_btn;
     ImageIcon reg_icon;
@@ -17,7 +17,7 @@ public class CandidateRegisterDeregister extends JFrame implements ActionListene
     ImageIcon back_icon;
     JLabel elect_heading;
     JLabel main_title;
-    public CandidateRegisterDeregister(){
+    public CandidatteManagement(){
         this.setSize(800,500);
         this.setTitle("Candidate Registration / Deregistration Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,10 +42,10 @@ public class CandidateRegisterDeregister extends JFrame implements ActionListene
 
 
         main_title = new JLabel();
-        main_title.setText("Candidate Register / Deregister Panel");
+        main_title.setText("Candidate Management Panel");
         main_title.setFont(new Font("Calibri",Font.BOLD,20));
         //main_title.setBorder(BorderFactory.createLineBorder(Color.red));
-        main_title.setBounds(240,130,320,60);
+        main_title.setBounds(270,130,260,60);
 
         upper_line= new JPanel();
         upper_line.setBounds(100,210,600,3);
@@ -126,6 +126,7 @@ public class CandidateRegisterDeregister extends JFrame implements ActionListene
             this.dispose();
         }
         else if(e.getSource() == get_reg_cand_btn){
+            new RegisteredCandidates();
             this.dispose();
         }
         else if(e.getSource() == back_btn){

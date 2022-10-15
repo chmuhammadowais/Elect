@@ -258,7 +258,7 @@ public class CandidateDeregistration extends JFrame implements ActionListener {
                 System.out.println("Exception : "+ex);
             }
         } else if (e.getSource() == back_btn) {
-            new CandidateRegisterDeregister();
+            new CandidatteManagement();
             this.dispose();
 
         }

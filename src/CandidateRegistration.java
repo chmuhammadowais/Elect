@@ -244,7 +244,7 @@ JTextField user_standing_post_textfield;
         }
         else if(e.getSource() == back_btn){
             this.dispose();
-            new CandidateRegisterDeregister();
+            new CandidatteManagement();
         }
     }
 }
