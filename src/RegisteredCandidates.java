@@ -1,7 +1,12 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegisteredCandidates extends JFrame implements ActionListener {
     ImageIcon icon;
@@ -11,6 +16,7 @@ public class RegisteredCandidates extends JFrame implements ActionListener {
     JPanel upper_line;
     JButton back_btn;
     ImageIcon back_icon;
+    JTable table;
     public RegisteredCandidates(){
         this.setSize(800,500);
         this.setTitle("Candidate Registration / Deregistration Panel");
@@ -57,29 +63,55 @@ public class RegisteredCandidates extends JFrame implements ActionListener {
         back_btn.addActionListener(this);
 
         JPanel info_panel = new JPanel();
-        info_panel.setLayout(null);
         info_panel.setBounds(100,250,600,200);
-
-        JLabel user_id = new JLabel("ID",SwingConstants.CENTER);
-        user_id.setBounds(0,0,200,30);
-        user_id.setFont(new Font("Calibri", Font.BOLD,20));
-        user_id.setBorder(BorderFactory.createLineBorder(Color.red));
-
-        JLabel user_name = new JLabel("Name",SwingConstants.CENTER);
-        user_name.setBounds(200,0,200,30);
-        user_name.setFont(new Font("Calibri", Font.BOLD,20));
-        user_name.setBorder(BorderFactory.createLineBorder(Color.red));
-
-        JLabel user_standing_post = new JLabel("Post",SwingConstants.CENTER);
-        user_standing_post.setBounds(400,0,200,30);
-        user_standing_post.setFont(new Font("Calibri", Font.BOLD,20));
-        user_standing_post.setBorder(BorderFactory.createLineBorder(Color.red));
+        info_panel.setLayout(null);
+        info_panel.setBackground(Color.white);
+        String[] Headings = { "ID", "Name", "Position" };
+        String[][] Data = {};
+        DefaultTableModel model = new DefaultTableModel(Data,Headings);
+        table = new JTable(model);
+        table.setFont(new Font("Calibri",Font.BOLD,15));
+        table.setBounds(0, 0, 600, 190);
+        table.setShowVerticalLines(false);
+        table.getTableHeader().setFont(new Font("Calibri",Font.BOLD,18));
+        table.getTableHeader().setBackground(Color.lightGray);
+        table.setRowHeight(30);
+        table.setBackground(Color.white);
 
 
+        JScrollPane sp = new JScrollPane(table);
+        sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        sp.setBorder(BorderFactory.createLineBorder(Color.white));
+        sp.setBackground(Color.white);
+        sp.getVerticalScrollBar().setBorder(BorderFactory.createLineBorder(null));
+        sp.getViewport().setBackground(Color.white);
+        sp.setBounds(0,0,600,200);
+        info_panel.add(sp);
 
-        info_panel.add(user_id);
-        info_panel.add(user_name);
-        info_panel.add(user_standing_post);
+        ////////////////////////////////////////////////////////////////////////
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+            String query = "select ID, Name, Position from Candidates";
+            try (java.sql.Statement stmt = con.createStatement()) {
+                ResultSet rs = stmt.executeQuery(query);
+                int counter = 0;
+                while (rs.next()) {
+                    String ID = rs.getString("ID");
+                    String Name = rs.getString("Name");
+                    String Post = rs.getString("Position");
+                    model.insertRow(counter,new Object[]{ID,Name,Post});
+                    counter++;
+                }
+            } catch (SQLException ex) {
+                System.out.println("Exception : "+ex);
+            }
+        }     catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
         this.add(elect_heading);
         this.add(main_title);
         this.add(upper_line);

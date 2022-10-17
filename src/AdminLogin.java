@@ -18,6 +18,8 @@ public class AdminLogin extends JFrame implements ActionListener {
     JTextField admin_username_textfield;
     JLabel admin_password;
     JTextField admin_password_textfield;
+    JButton back_btn;
+    ImageIcon back_icon;
     String provoke;
 
     public AdminLogin(String provoke) {
@@ -105,6 +107,25 @@ public class AdminLogin extends JFrame implements ActionListener {
         login_btn.setBorder(new RoundedBorder(20));
         login_btn.addActionListener(this);
 
+        if(this.provoke.equals("AdminSignupDelete")){
+            admin_login_title.setText("Verify administrator credentials");
+            admin_login_title.setFont(new Font("Calibri", Font.BOLD, 20));
+            //admin_login_title.setBorder(BorderFactory.createLineBorder(Color.red));
+            admin_login_title.setBounds(265, 130, 270, 60);
+
+            back_btn = new JButton();
+            back_icon = new ImageIcon("back.png");
+            back_btn.setIcon(back_icon);
+            back_btn.setFocusable(false);
+            back_btn.setContentAreaFilled(false);
+            back_btn.setOpaque(false);
+            back_btn.setFont(new Font("Calibri",Font.BOLD,17));
+            back_btn.setBounds(30,410,30,30);
+            back_btn.setBorder(null);
+            back_btn.addActionListener(this);
+            this.add(back_btn);
+        }
+
 
         this.add(elect_heading);
         this.add(admin_login_title);
@@ -164,6 +185,10 @@ public class AdminLogin extends JFrame implements ActionListener {
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("Exception : "+ex);
             }
+        }
+        else if(e.getSource() == back_btn){
+            new MainFrame();
+            this.dispose();
         }
     }
 }
