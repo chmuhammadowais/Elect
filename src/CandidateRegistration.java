@@ -17,7 +17,7 @@ public class CandidateRegistration extends JFrame implements ActionListener {
 JLabel elect_heading;
 ImageIcon icon;
 ImageIcon header_icon;
-JLabel reg_title;
+JLabel main_title;
 JButton reg_btn;
 JPanel upper_line;
 JButton back_btn;
@@ -61,11 +61,11 @@ JTextField user_standing_post_textfield;
         //elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
         elect_heading.setBounds(365,0,70,100);
 
-        reg_title = new JLabel();
-        reg_title.setText("Candidate Registration Panel");
-        reg_title.setFont(new Font("Calibri",Font.BOLD,20));
+        main_title = new JLabel();
+        main_title.setText("Candidate Registration Panel");
+        main_title.setFont(new Font("Calibri",Font.BOLD,20));
        // reg_title.setBorder(BorderFactory.createLineBorder(Color.red));
-        reg_title.setBounds(274,130,248,60);
+        main_title.setBounds(274,130,248,60);
 
         upper_line = new JPanel();
         upper_line.setBounds(100,210,600,3);
@@ -168,7 +168,7 @@ JTextField user_standing_post_textfield;
 
 
         this.add(elect_heading);
-        this.add(reg_title);
+        this.add(main_title);
         this.add(upper_line);
         this.add(pic_panel);
         this.add(user_id);
