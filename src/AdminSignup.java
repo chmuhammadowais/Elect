@@ -21,6 +21,12 @@ public class AdminSignup extends JFrame implements ActionListener {
     JTextField admin_password_textfield;
 
     public AdminSignup() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
         this.setSize(800, 500);
         this.setTitle("Admin Signup Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

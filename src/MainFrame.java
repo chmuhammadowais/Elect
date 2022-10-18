@@ -14,6 +14,12 @@ public class MainFrame extends JFrame implements ActionListener {
     JLabel welcome_title;
     JPanel upper_line;
     public MainFrame(){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
         this.setSize(800,500);
         this.setTitle("Admin Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

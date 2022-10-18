@@ -23,6 +23,12 @@ public class AdminLogin extends JFrame implements ActionListener {
     String provoke;
 
     public AdminLogin(String provoke) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
         this.provoke = provoke;
         this.setSize(800, 500);
         this.setTitle("Admin Login");

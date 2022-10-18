@@ -20,6 +20,12 @@ public class AdminDelete extends JFrame implements ActionListener {
     JLabel admin_password;
     JTextField admin_password_textfield;
     public AdminDelete() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
         this.setSize(800, 500);
         this.setTitle("Admin Deletion Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

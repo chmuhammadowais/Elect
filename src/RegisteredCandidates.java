@@ -18,6 +18,12 @@ public class RegisteredCandidates extends JFrame implements ActionListener {
     ImageIcon back_icon;
     JTable table;
     public RegisteredCandidates(){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
         this.setSize(800,500);
         this.setTitle("Candidate Registration / Deregistration Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

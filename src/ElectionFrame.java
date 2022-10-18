@@ -19,6 +19,11 @@ public class ElectionFrame extends JFrame implements ActionListener {
     JLabel pic_panel_def_pic;
 
     public ElectionFrame(){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
     this.setSize(800,500);
     this.setTitle("Time Panel");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

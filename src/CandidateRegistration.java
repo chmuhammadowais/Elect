@@ -35,6 +35,11 @@ JLabel user_standing_post;
 JTextField user_standing_post_textfield;
 
     public CandidateRegistration(){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
         this.setSize(800,500);
         this.setTitle("Candidate Registration Panel");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
