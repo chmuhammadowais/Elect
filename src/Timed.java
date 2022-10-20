@@ -150,6 +150,8 @@ public class Timed extends JFrame implements ActionListener {
             int in_sec =  in_min*60;
             System.out.println("In Minutes : "+in_min);
             System.out.println("In Seconds : "+in_sec);
+            new CastVote();
+            this.dispose();
 
         }
         else if(e.getSource() == back_btn){

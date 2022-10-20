@@ -1,0 +1,142 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
+
+public class OptionCreator extends JFrame implements ActionListener {
+    String post_to_retrieve;
+    JLabel elect_heading;
+    ImageIcon icon;
+    ImageIcon header_icon;
+    JLabel main_title;
+    JPanel upper_line;
+    JPanel container;
+    ButtonGroup btn_grp;
+    JButton vote_button;
+    JScrollPane sp;
+    public OptionCreator(String post_to_retrieve){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            System.out.println("Exception : "+ex);
+        }
+this.post_to_retrieve = post_to_retrieve;
+        this.setSize(800, 500);
+        this.setTitle("Selection Panel");
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setLayout(null);
+        this.getContentPane().setBackground(Color.white);
+        icon = new ImageIcon("logo.png");
+        this.setIconImage(icon.getImage());
+
+        header_icon = new ImageIcon("heading.png");
+        elect_heading = new JLabel();
+        elect_heading.setText("Elect");
+        elect_heading.setFont(new Font("Calibri", Font.BOLD, 32));
+        elect_heading.setIcon(header_icon);
+        elect_heading.setIconTextGap(4);
+        elect_heading.setVerticalTextPosition(JLabel.BOTTOM);
+        elect_heading.setHorizontalTextPosition(JLabel.CENTER);
+       // elect_heading.setBorder(BorderFactory.createLineBorder(Color.red));
+        elect_heading.setBounds(365, 0, 70, 100);
+
+        main_title = new JLabel();
+        main_title.setText("Candidate selection panel");
+        main_title.setFont(new Font("Calibri", Font.BOLD, 20));
+      //  main_title.setBorder(BorderFactory.createLineBorder(Color.red));
+        main_title.setBounds(290, 130, 220, 60);
+
+        upper_line = new JPanel();
+        upper_line.setBounds(100, 210, 600, 3);
+        upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        container = new JPanel();
+        container.setLayout(new FlowLayout());
+        container.setBackground(Color.white);
+       // container.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        ImageIcon selected = new ImageIcon("check.png");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
+            PreparedStatement ps = con.prepareStatement("select Name,Position,Picture from candidates where Position=?");
+
+            try {
+                ps.setString(1,post_to_retrieve);
+                ResultSet rs = ps.executeQuery();
+                int panel_creation_counter = 0;
+                btn_grp = new ButtonGroup();
+                while (rs.next()) {
+                    String Name = rs.getString("Name");
+                    String post = rs.getString("Position");
+                    Blob blob = rs.getBlob("Picture");
+                    ImageIcon image = new ImageIcon(blob.getBytes(1, (int)blob.length()));
+                    ImageIcon imgThisImg = new ImageIcon(new ImageIcon(image.getImage()).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+                    JRadioButton but = new JRadioButton();
+                    but.setActionCommand(Name);
+                    but.setBackground(Color.white);
+                    but.setIcon(imgThisImg);
+                    but.setSelectedIcon(selected);
+                    but.setFont(new Font("Calibri",Font.BOLD,17));
+                    but.setFocusable(false);
+                    JPanel panel = new JPanel();
+                    panel.setBackground(Color.white);
+                    but.addActionListener(this);
+                    but.setText(Name+" standing as "+post);
+                    panel.add(but);
+                    btn_grp.add(but);
+                    //panel.setBorder(BorderFactory.createLineBorder(Color.red));
+                    panel.setPreferredSize(new Dimension(300,50));
+                    container.add(panel);
+
+                    System.out.println(Name+post);
+                    panel_creation_counter++;
+                }
+
+
+                container.setPreferredSize(new Dimension(300,panel_creation_counter*56));
+                sp = new JScrollPane(container);
+                sp.setLayout(new ScrollPaneLayout());
+                sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+                sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                sp.setBorder(BorderFactory.createLineBorder(Color.white));
+                sp.setBackground(Color.white);
+                sp.getVerticalScrollBar().setBorder(BorderFactory.createLineBorder(null));
+                //sp.setBorder(BorderFactory.createLineBorder(Color.red));
+                sp.getViewport().setBackground(Color.white);
+                sp.setBounds(200,250,400,160);
+
+                vote_button = new JButton("Vote");
+                vote_button.setPreferredSize(new Dimension(200,50));
+                vote_button.setFocusable(false);
+                vote_button.setContentAreaFilled(false);
+                vote_button.setOpaque(false);
+                vote_button.setFont(new Font("Calibri",Font.BOLD,17));
+                vote_button.addActionListener(this);
+                vote_button.setBorder(new RoundedBorder(5));
+                vote_button.setBounds(300,420,200,30);
+
+            } catch (SQLException ex) {
+                System.out.println("Exception : "+ex);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("Exception : "+ex);
+        }
+
+        this.add(elect_heading);
+        this.add(main_title);
+        this.add(upper_line);
+        this.add(sp);
+        this.add(vote_button);
+        this.setVisible(true);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == vote_button){
+            System.out.println(btn_grp.getSelection().getActionCommand());
+            this.dispose();
+        }
+    }
+}
