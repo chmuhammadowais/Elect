@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CandidatteManagement extends JFrame implements ActionListener {
+public class CandidatteManagement  implements ActionListener {
     JPanel upper_line;
     JButton reg_btn;
     ImageIcon reg_icon;
@@ -17,22 +17,23 @@ public class CandidatteManagement extends JFrame implements ActionListener {
     ImageIcon back_icon;
     JLabel elect_heading;
     JLabel main_title;
+    JFrame frame;
     public CandidatteManagement(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-
-        this.setSize(800,500);
-        this.setTitle("Candidate Registration / Deregistration Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Candidate Registration / Deregistration Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
 
         header_icon = new ImageIcon("heading.png");
@@ -112,32 +113,32 @@ public class CandidatteManagement extends JFrame implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
-        this.add(elect_heading);
-        this.add(upper_line);
-        this.add(main_title);
-        this.add(reg_btn);
-        this.add(dereg_btn);
-        this.add(get_reg_cand_btn);
-        this.add(back_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(upper_line);
+        frame.add(main_title);
+        frame.add(reg_btn);
+        frame.add(dereg_btn);
+        frame.add(get_reg_cand_btn);
+        frame.add(back_btn);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == reg_btn){
             new CandidateRegistration();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == dereg_btn){
             new CandidateDeregistration();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == get_reg_cand_btn){
             new RegisteredCandidates();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == back_btn){
             new MainFrame();
-            this.dispose();
+            frame.dispose();
         }
     }
 }

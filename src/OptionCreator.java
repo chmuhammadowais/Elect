@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class OptionCreator extends JFrame implements ActionListener {
+public class OptionCreator implements ActionListener {
     String post_to_retrieve;
     JLabel elect_heading;
     ImageIcon icon;
@@ -15,22 +15,24 @@ public class OptionCreator extends JFrame implements ActionListener {
     ButtonGroup btn_grp;
     JButton vote_button;
     JScrollPane sp;
+    JFrame frame;
     public OptionCreator(String post_to_retrieve){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-this.post_to_retrieve = post_to_retrieve;
-        this.setSize(800, 500);
-        this.setTitle("Selection Panel");
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        this.post_to_retrieve = post_to_retrieve;
+        frame.setSize(800, 500);
+        frame.setTitle("Selection Panel");
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -125,18 +127,26 @@ this.post_to_retrieve = post_to_retrieve;
             System.out.println("Exception : "+ex);
         }
 
-        this.add(elect_heading);
-        this.add(main_title);
-        this.add(upper_line);
-        this.add(sp);
-        this.add(vote_button);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(main_title);
+        frame.add(upper_line);
+        frame.add(sp);
+        frame.add(vote_button);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == vote_button){
             System.out.println(btn_grp.getSelection().getActionCommand());
-            this.dispose();
+            frame.dispose();
+            if(Positions.counter_for_btngrp == 0){
+                JOptionPane.showMessageDialog(null, "Vote Cast Successful","Vote Casted",JOptionPane.INFORMATION_MESSAGE);
+                Positions.frame.dispose();
+                if(CastVote.frame == null){
+                    new CastVote("Timeless");
+                }
+
+            }
         }
     }
 }

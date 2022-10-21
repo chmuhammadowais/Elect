@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegisteredCandidates extends JFrame implements ActionListener {
+public class RegisteredCandidates implements ActionListener {
     ImageIcon icon;
     ImageIcon header_icon;
     JLabel main_title;
@@ -17,22 +17,23 @@ public class RegisteredCandidates extends JFrame implements ActionListener {
     JButton back_btn;
     ImageIcon back_icon;
     JTable table;
+    JFrame frame;
     public RegisteredCandidates(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-
-        this.setSize(800,500);
-        this.setTitle("Candidate Registration / Deregistration Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Candidate Registration / Deregistration Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
 
         header_icon = new ImageIcon("heading.png");
@@ -118,18 +119,18 @@ public class RegisteredCandidates extends JFrame implements ActionListener {
             System.out.println("Exception : "+ex);
         }
 
-        this.add(elect_heading);
-        this.add(main_title);
-        this.add(upper_line);
-        this.add(back_btn);
-        this.add(info_panel);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(main_title);
+        frame.add(upper_line);
+        frame.add(back_btn);
+        frame.add(info_panel);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == back_btn){
             new CandidatteManagement();
-            this.dispose();
+            frame.dispose();
         }
     }
 }

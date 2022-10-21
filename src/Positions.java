@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.LinkedList;
 
-public class Positions extends JFrame implements ActionListener {
+public class Positions implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -17,21 +17,25 @@ public class Positions extends JFrame implements ActionListener {
     JRadioButton pos_btn;
     JButton proceed_btn;
     ImageIcon proceed;
+
+    public static JFrame frame;
+    public static int counter_for_btngrp = 0;
     public Positions(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Voting Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Voting Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -70,7 +74,6 @@ public class Positions extends JFrame implements ActionListener {
                 LinkedList<String> positions = new LinkedList<>();
                 int btn_creation_counter = 0;
                 ResultSet rs = ps.executeQuery();
-
                 while (rs.next()) {
                     positions.add(rs.getNString("Position"));
                     pos_btn = new JRadioButton();
@@ -120,22 +123,27 @@ public class Positions extends JFrame implements ActionListener {
         proceed_btn.addActionListener(this);
         proceed_btn.setBounds(740,410,30,30);
 
-        this.add(sp);
-        this.add(sp);
-        this.add(elect_heading);
-        this.add(main_title);
-        this.add(upper_line);
-        this.add(proceed_btn);
-        this.setVisible(true);
+        counter_for_btngrp = btn_grp.getButtonCount();
+
+        frame.add(sp);
+        frame.add(sp);
+        frame.add(elect_heading);
+        frame.add(main_title);
+        frame.add(upper_line);
+        frame.add(proceed_btn);
+        frame.setVisible(true);
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == proceed_btn){
+            counter_for_btngrp--;
             System.out.println(btn_grp.getSelection().getActionCommand());
             btn_grp.getSelection().setEnabled(false);
             new OptionCreator(btn_grp.getSelection().getActionCommand());
+            if(counter_for_btngrp == btn_grp.getButtonCount()){
+                frame.dispose();
+            }
         }
-
-
     }
 }

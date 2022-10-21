@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class AdminLogin extends JFrame implements ActionListener {
+public class AdminLogin  implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -20,7 +20,8 @@ public class AdminLogin extends JFrame implements ActionListener {
     JTextField admin_password_textfield;
     JButton back_btn;
     ImageIcon back_icon;
-    String provoke;
+    String provoke_type;
+    JFrame frame;
 
     public AdminLogin(String provoke) {
         try {
@@ -28,17 +29,17 @@ public class AdminLogin extends JFrame implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-
-        this.provoke = provoke;
-        this.setSize(800, 500);
-        this.setTitle("Admin Login");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        this.provoke_type = provoke;
+        frame.setSize(800, 500);
+        frame.setTitle("Admin Login");
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -113,7 +114,7 @@ public class AdminLogin extends JFrame implements ActionListener {
         login_btn.setBorder(new RoundedBorder(20));
         login_btn.addActionListener(this);
 
-        if(this.provoke.equals("AdminSignupDelete")){
+        if(this.provoke_type.equals("verification")){
             admin_login_title.setText("Verify administrator credentials");
             admin_login_title.setFont(new Font("Calibri", Font.BOLD, 20));
             //admin_login_title.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -129,22 +130,22 @@ public class AdminLogin extends JFrame implements ActionListener {
             back_btn.setBounds(30,410,30,30);
             back_btn.setBorder(null);
             back_btn.addActionListener(this);
-            this.add(back_btn);
+            frame.add(back_btn);
         }
 
 
-        this.add(elect_heading);
-        this.add(admin_login_title);
-        this.add(upper_line);
-        this.add(pic_panel);
-        this.add(admin_username);
-        this.add(admin_username_line);
-        this.add(admin_username_textfield);
-        this.add(admin_password);
-        this.add(admin_password_line);
-        this.add(admin_password_textfield);
-        this.add(login_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(admin_login_title);
+        frame.add(upper_line);
+        frame.add(pic_panel);
+        frame.add(admin_username);
+        frame.add(admin_username_line);
+        frame.add(admin_username_textfield);
+        frame.add(admin_password);
+        frame.add(admin_password_line);
+        frame.add(admin_password_textfield);
+        frame.add(login_btn);
+        frame.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -164,14 +165,24 @@ public class AdminLogin extends JFrame implements ActionListener {
                         String password = rs.getString("Password");
 
                     if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
-                        if(this.provoke.equals("MainFrame")){
+                        if(this.provoke_type.equals("MainFrame")){
+                            frame.dispose();
+
                             new MainFrame();
                         }
-                        else if(this.provoke.equals("AdminSignupDelete")){
-                            new AdminSignupDelete();
+                        else if(this.provoke_type.equals("verification")){
+                            frame.dispose();
+                            if(MainFrame.frame == null){
+                                CastVote.frame.dispose();
+                                JOptionPane.showMessageDialog(null,"Voting Ended","Operation successful",JOptionPane.PLAIN_MESSAGE);
+                            }
+                            else if(CastVote.frame == null){
+                                MainFrame.frame.dispose();
+                                new AdminSignupDelete();
+                            }
                         }
 
-                        this.dispose();
+                        frame.dispose();
                     }
                     else if(admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password)){
                         JOptionPane.showMessageDialog(null, "Invalid Password", "Error",JOptionPane.ERROR_MESSAGE);
@@ -193,8 +204,8 @@ public class AdminLogin extends JFrame implements ActionListener {
             }
         }
         else if(e.getSource() == back_btn){
-            new MainFrame();
-            this.dispose();
+//            new MainFrame();
+            frame.dispose();
         }
     }
 }

@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CastVote extends JFrame implements ActionListener {
+public class CastVote implements ActionListener {
+    String implementation_type;
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -13,22 +14,29 @@ public class CastVote extends JFrame implements ActionListener {
     JPanel pic_panel;
     JLabel pic_panel_def_pic;
     JButton cast_btn;
+    static JFrame frame;
+    JButton end_btn;
 
-    public CastVote(){
+    public CastVote(String implementation_type){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Voting Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        this.implementation_type = implementation_type;
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Voting Panel");
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        if(implementation_type.equals("Timed")){
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -75,19 +83,33 @@ public class CastVote extends JFrame implements ActionListener {
         cast_btn.setBorder(new RoundedBorder(20));
         cast_btn.addActionListener(this);
 
-        this.add(elect_heading);
-        this.add(user_ID);
+        if(implementation_type.equals("Timeless")){
+            end_btn = new JButton();
+            ImageIcon end_icon = new ImageIcon("end.png");
+            end_btn.setIcon(end_icon);
+            end_btn.setBounds(0,0,50,50);
+            end_btn.setFocusable(false);
+            end_btn.setContentAreaFilled(false);
+            end_btn.setOpaque(false);
+            end_btn.addActionListener(this);
+            frame.add(end_btn);
+        }
+        frame.add(elect_heading);
+        frame.add(user_ID);
         //this.add(upper_line);
-        this.add(pic_panel);
-        this.add(cast_btn);
-        this.setVisible(true);
+        frame.add(pic_panel);
+        frame.add(cast_btn);
+        frame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == cast_btn){
             new VoterVerification();
-            this.dispose();
+//            frame.dispose();
+        } else if (e.getSource() == end_btn) {
+            new AdminLogin("verification");
+
         }
 
     }

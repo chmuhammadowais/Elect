@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class AdminDelete extends JFrame implements ActionListener {
+public class AdminDelete  implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -19,22 +19,23 @@ public class AdminDelete extends JFrame implements ActionListener {
     JTextField admin_username_textfield;
     JLabel admin_password;
     JTextField admin_password_textfield;
+    JFrame frame;
     public AdminDelete() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-
-        this.setSize(800, 500);
-        this.setTitle("Admin Deletion Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800, 500);
+        frame.setTitle("Admin Deletion Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -121,19 +122,19 @@ public class AdminDelete extends JFrame implements ActionListener {
         delete_btn.addActionListener(this);
 
 
-        this.add(elect_heading);
-        this.add(admin_delete_title);
-        this.add(upper_line);
-        this.add(pic_panel);
-        this.add(admin_username);
-        this.add(admin_username_line);
-        this.add(admin_username_textfield);
-        this.add(admin_password);
-        this.add(admin_password_line);
-        this.add(admin_password_textfield);
-        this.add(delete_btn);
-        this.add(back_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(admin_delete_title);
+        frame.add(upper_line);
+        frame.add(pic_panel);
+        frame.add(admin_username);
+        frame.add(admin_username_line);
+        frame.add(admin_username_textfield);
+        frame.add(admin_password);
+        frame.add(admin_password_line);
+        frame.add(admin_password_textfield);
+        frame.add(delete_btn);
+        frame.add(back_btn);
+        frame.setVisible(true);
     }
 
     @Override
@@ -199,7 +200,7 @@ public class AdminDelete extends JFrame implements ActionListener {
         }
         else if(e.getSource() == back_btn){
             new AdminSignupDelete();
-            this.dispose();
+            frame.dispose();
         }
     }
 }

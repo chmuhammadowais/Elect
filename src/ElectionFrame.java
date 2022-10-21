@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ElectionFrame extends JFrame implements ActionListener {
+public class ElectionFrame implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -15,6 +15,7 @@ public class ElectionFrame extends JFrame implements ActionListener {
     ImageIcon Timeless_icon;
     JButton back_btn;
     ImageIcon back_icon;
+    JFrame frame;
 
     public ElectionFrame() {
         try {
@@ -22,15 +23,16 @@ public class ElectionFrame extends JFrame implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Time Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Time Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -96,27 +98,27 @@ public class ElectionFrame extends JFrame implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
-        this.add(elect_heading);
-        this.add(main_title);
-        this.add(upper_line);
-        this.add(Timed_btn);
-        this.add(Timeless_btn);
-        this.add(back_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(main_title);
+        frame.add(upper_line);
+        frame.add(Timed_btn);
+        frame.add(Timeless_btn);
+        frame.add(back_btn);
+        frame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == Timed_btn){
             new Timed();
-            this.dispose();
+            frame.dispose();
         } else if (e.getSource() == Timeless_btn) {
             new Timeless();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == back_btn){
             new MainFrame();
-            this.dispose();
+            frame.dispose();
         }
     }
 }

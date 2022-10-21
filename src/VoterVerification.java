@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class VoterVerification extends JFrame implements ActionListener {
+public class VoterVerification implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -16,24 +16,25 @@ public class VoterVerification extends JFrame implements ActionListener {
     JTextField user_ID_textfield;
     JTextField user_password_textfield;
     JButton login_btn;
+    JButton back_btn;
+    ImageIcon back_icon;
+    JFrame frame;
     public VoterVerification(){
-        this.dispose();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-
-
-        this.setSize(800, 500);
-        this.setTitle("User Verification");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800, 500);
+        frame.setTitle("User Verification");
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -98,6 +99,17 @@ public class VoterVerification extends JFrame implements ActionListener {
         user_password_textfield.setHorizontalAlignment(JTextField.CENTER);
         user_password_textfield.setBounds(405, 310, 270, 20);
 
+        back_btn = new JButton();
+        back_icon = new ImageIcon("back.png");
+        back_btn.setIcon(back_icon);
+        back_btn.setFocusable(false);
+        back_btn.setContentAreaFilled(false);
+        back_btn.setOpaque(false);
+        back_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        back_btn.setBounds(30,410,30,30);
+        back_btn.setBorder(null);
+        back_btn.addActionListener(this);
+
         login_btn = new JButton();
         login_btn.setText("Login");
         login_btn.setFocusable(false);
@@ -109,18 +121,19 @@ public class VoterVerification extends JFrame implements ActionListener {
         login_btn.addActionListener(this);
 
 
-        this.add(elect_heading);
-        this.add(verification_title);
-        this.add(upper_line);
-        this.add(pic_panel);
-        this.add(user_ID);
-        this.add(user_ID_line);
-        this.add(user_ID_textfield);
-        this.add(user_password);
-        this.add(user_password_line);
-        this.add(user_password_textfield);
-        this.add(login_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(verification_title);
+        frame.add(upper_line);
+        frame.add(pic_panel);
+        frame.add(user_ID);
+        frame.add(user_ID_line);
+        frame.add(user_ID_textfield);
+        frame.add(user_password);
+        frame.add(user_password_line);
+        frame.add(user_password_textfield);
+        frame.add(login_btn);
+        frame.add(back_btn);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -142,7 +155,7 @@ public class VoterVerification extends JFrame implements ActionListener {
 
                         JOptionPane.showMessageDialog(null, "Credentials Match", "Match",JOptionPane.INFORMATION_MESSAGE);
                         new Positions();
-                        this.dispose();
+                        frame.dispose();
 
                     }
                     else if(user_ID_textfield.getText().equals(ID) && !user_password_textfield.getText().equals(password)){
@@ -162,6 +175,9 @@ public class VoterVerification extends JFrame implements ActionListener {
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("Exception : "+ex);
             }
+        }
+        else if (e.getSource() == back_btn){
+            frame.dispose();
         }
     }
 }

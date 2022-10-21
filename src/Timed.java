@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Timed extends JFrame implements ActionListener {
+public class Timed implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -21,6 +21,7 @@ public class Timed extends JFrame implements ActionListener {
     JLabel image_panel_piclabel;
     JComboBox<Object> hour_box;
     JComboBox<Object> min_box;
+    JFrame frame;
 
     public Timed(){
         try {
@@ -28,15 +29,16 @@ public class Timed extends JFrame implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Time Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Time Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -127,17 +129,17 @@ public class Timed extends JFrame implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
-        this.add(elect_heading);
-        this.add(main_title);
-        this.add(upper_line);
-        this.add(hour_label);
-        this.add(set_time_btn);
-        this.add(image_panel);
-        this.add(back_btn);
-        this.add(hour_box);
-        this.add(min_box);
-        this.add(min_label);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(main_title);
+        frame.add(upper_line);
+        frame.add(hour_label);
+        frame.add(set_time_btn);
+        frame.add(image_panel);
+        frame.add(back_btn);
+        frame.add(hour_box);
+        frame.add(min_box);
+        frame.add(min_label);
+        frame.setVisible(true);
     }
 
     @Override
@@ -150,13 +152,13 @@ public class Timed extends JFrame implements ActionListener {
             int in_sec =  in_min*60;
             System.out.println("In Minutes : "+in_min);
             System.out.println("In Seconds : "+in_sec);
-            new CastVote();
-            this.dispose();
+            new CastVote("Timed");
+            frame.dispose();
 
         }
         else if(e.getSource() == back_btn){
             new ElectionFrame();
-            this.dispose();
+            frame.dispose();
 
         }
 

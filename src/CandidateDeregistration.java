@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class CandidateDeregistration extends JFrame implements ActionListener {
+public class CandidateDeregistration implements ActionListener {
     JLabel elect_heading;
     ImageIcon icon;
     ImageIcon header_icon;
@@ -21,6 +21,7 @@ public class CandidateDeregistration extends JFrame implements ActionListener {
     JLabel pic_panel_def_pic;
     JButton dereg_conf;
     JFrame confirmation_frame;
+    JFrame frame;
 
     public CandidateDeregistration(){
         try {
@@ -28,15 +29,16 @@ public class CandidateDeregistration extends JFrame implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Candidate Deregistration Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Candidate Deregistration Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -108,16 +110,16 @@ public class CandidateDeregistration extends JFrame implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
-        this.add(elect_heading);
-        this.add(dereg_title);
-        this.add(upper_line);
-        this.add(user_id);
-        this.add(user_id_textfield);
-        this.add(user_id_line);
-        this.add(dereg_btn);
-        this.add(pic_panel);
-        this.add(back_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(dereg_title);
+        frame.add(upper_line);
+        frame.add(user_id);
+        frame.add(user_id_textfield);
+        frame.add(user_id_line);
+        frame.add(dereg_btn);
+        frame.add(pic_panel);
+        frame.add(back_btn);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -264,7 +266,7 @@ public class CandidateDeregistration extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == back_btn) {
             new CandidatteManagement();
-            this.dispose();
+            frame.dispose();
 
         }
         else if(e.getSource() == dereg_cancel){

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AdminSignupDelete extends JFrame implements ActionListener {
+public class AdminSignupDelete implements ActionListener {
     JPanel upper_line;
     JButton admin_signup_btn;
     ImageIcon admin_signup_icon;
@@ -15,21 +15,23 @@ public class AdminSignupDelete extends JFrame implements ActionListener {
     ImageIcon back_icon;
     JLabel elect_heading;
     JLabel main_title;
+    JFrame frame;
     public AdminSignupDelete(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Admin Signup / Deletion Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Admin Signup / Deletion Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
 
         header_icon = new ImageIcon("heading.png");
@@ -97,30 +99,30 @@ public class AdminSignupDelete extends JFrame implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
-        this.add(elect_heading);
-        this.add(upper_line);
-        this.add(main_title);
-        this.add(admin_signup_btn);
-        this.add(admin_delete_btn);
-        this.add(back_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(upper_line);
+        frame.add(main_title);
+        frame.add(admin_signup_btn);
+        frame.add(admin_delete_btn);
+        frame.add(back_btn);
+        frame.setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == admin_signup_btn){
             new AdminSignup();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == admin_delete_btn){
             new AdminDelete();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == back_btn){
             new MainFrame();
-            this.dispose();
+            frame.dispose();
         }
         else if(e.getSource() == back_btn){
             new AdminSignupDelete();
-            this.dispose();
+            frame.dispose();
         }
     }
 }

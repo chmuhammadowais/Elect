@@ -13,7 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-public class CandidateRegistration extends JFrame implements ActionListener {
+public class CandidateRegistration implements ActionListener {
 JLabel elect_heading;
 ImageIcon icon;
 ImageIcon header_icon;
@@ -33,6 +33,7 @@ JLabel user_name;
 JTextField user_name_textfield;
 JLabel user_standing_post;
 JTextField user_standing_post_textfield;
+JFrame frame;
 
     public CandidateRegistration(){
         try {
@@ -40,15 +41,16 @@ JTextField user_standing_post_textfield;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-        this.setSize(800,500);
-        this.setTitle("Candidate Registration Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Candidate Registration Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
@@ -167,24 +169,24 @@ JTextField user_standing_post_textfield;
         back_btn.addActionListener(this);
 
 
-        this.add(elect_heading);
-        this.add(main_title);
-        this.add(upper_line);
-        this.add(pic_panel);
-        this.add(user_id);
-        this.add(user_id_line);
-        this.add(user_id_textfield);
-        this.add(user_name);
-        this.add(user_name_line);
-        this.add(user_name_textfield);
-        this.add(user_standing_post);
-        this.add(user_standing_post_line);
-        this.add(user_standing_post_textfield);
-        this.add(reg_btn);
-        this.add(pic_chooser_btn);
-        this.add(pic_path_label);
-        this.add(back_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(main_title);
+        frame.add(upper_line);
+        frame.add(pic_panel);
+        frame.add(user_id);
+        frame.add(user_id_line);
+        frame.add(user_id_textfield);
+        frame.add(user_name);
+        frame.add(user_name_line);
+        frame.add(user_name_textfield);
+        frame.add(user_standing_post);
+        frame.add(user_standing_post_line);
+        frame.add(user_standing_post_textfield);
+        frame.add(reg_btn);
+        frame.add(pic_chooser_btn);
+        frame.add(pic_path_label);
+        frame.add(back_btn);
+        frame.setVisible(true);
 
     }
     @Override
@@ -248,7 +250,7 @@ JTextField user_standing_post_textfield;
 
         }
         else if(e.getSource() == back_btn){
-            this.dispose();
+            frame.dispose();
             new CandidatteManagement();
         }
     }

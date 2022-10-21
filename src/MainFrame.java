@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame implements ActionListener {
     JButton cand_mgmt_btn;
     JButton elec_start_btn;
     JButton result_btn;
@@ -13,22 +13,23 @@ public class MainFrame extends JFrame implements ActionListener {
     JLabel elect_heading;
     JLabel welcome_title;
     JPanel upper_line;
+    static JFrame frame;
     public MainFrame(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
-
-        this.setSize(800,500);
-        this.setTitle("Admin Panel");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(Color.white);
+        frame = new JFrame();
+        frame.setSize(800,500);
+        frame.setTitle("Admin Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.white);
         icon = new ImageIcon("logo.png");
-        this.setIconImage(icon.getImage());
+        frame.setIconImage(icon.getImage());
 
 
         header_icon = new ImageIcon("heading.png");
@@ -93,33 +94,33 @@ public class MainFrame extends JFrame implements ActionListener {
         adm_signupdete_btn.addActionListener(this);
 
 
-        this.add(elect_heading);
-        this.add(welcome_title);
-        this.add(upper_line);
-        this.add(cand_mgmt_btn);
-        this.add(elec_start_btn);
-        this.add(result_btn);
-        this.add(adm_signupdete_btn);
-        this.setVisible(true);
+        frame.add(elect_heading);
+        frame.add(welcome_title);
+        frame.add(upper_line);
+        frame.add(cand_mgmt_btn);
+        frame.add(elec_start_btn);
+        frame.add(result_btn);
+        frame.add(adm_signupdete_btn);
+        frame.setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
           if(e.getSource() == cand_mgmt_btn){
               cand_mgmt_btn.setEnabled(false);
-              this.dispose();
+              frame.dispose();
               new CandidatteManagement();
           }
           else if(e.getSource() == elec_start_btn){
-              this.dispose();
+              frame.dispose();
               new ElectionFrame();
               elec_start_btn.setEnabled(false);
           }
           else if(e.getSource() == result_btn){
-              this.dispose();
+              frame.dispose();
               result_btn.setEnabled(false);
           }
           else if(e.getSource() == adm_signupdete_btn){
-              new AdminLogin("AdminSignupDelete");
-              this.dispose();
+              new AdminLogin("verification");
+//              frame.dispose();
           }
     }
 }
