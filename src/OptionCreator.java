@@ -137,16 +137,23 @@ public class OptionCreator implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == vote_button){
-            System.out.println(btn_grp.getSelection().getActionCommand());
-            frame.dispose();
-            if(Positions.counter_for_btngrp == 0){
-                JOptionPane.showMessageDialog(null, "Vote Cast Successful","Vote Casted",JOptionPane.INFORMATION_MESSAGE);
-                Positions.frame.dispose();
-                if(CastVote.frame == null){
-                    new CastVote("Timeless");
-                }
+            try{
+                System.out.println(btn_grp.getSelection().getActionCommand());
+                frame.dispose();
+                if(Positions.counter_for_btngrp == 0){
+                    JOptionPane.showMessageDialog(null, "Vote Cast Successful","Vote Casted",JOptionPane.INFORMATION_MESSAGE);
+                    Positions.frame.dispose();
+                    if(CastVote.frame == null){
+                        new CastVote("Timeless");
+                    }
 
+                }
             }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"At least select one of the given options.","Error",JOptionPane.WARNING_MESSAGE);
+                System.out.println("Exception : "+ex);
+            }
+
         }
     }
 }

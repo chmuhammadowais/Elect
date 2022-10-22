@@ -16,6 +16,7 @@ public class Timeless implements ActionListener {
     ImageIcon avatar;
     JLabel image_panel_piclabel;
     JFrame frame;
+    JButton proceed_btn;
 
     public Timeless(){
         try {
@@ -46,10 +47,10 @@ public class Timeless implements ActionListener {
         elect_heading.setBounds(365,0,70,100);
 
         main_title = new JLabel();
-        main_title.setText("Election Time Setup");
+        main_title.setText("Timeless Election Setup");
         main_title.setFont(new Font("Calibri",Font.BOLD,20));
-        //main_title.setBorder(BorderFactory.createLineBorder(Color.red));
-        main_title.setBounds(315,130,170,60);
+       // main_title.setBorder(BorderFactory.createLineBorder(Color.red));
+        main_title.setBounds(300,130,200,60);
 
         upper_line = new JPanel();
         upper_line.setBounds(100,210,600,3);
@@ -59,7 +60,7 @@ public class Timeless implements ActionListener {
         lower_line.setBounds(338, 350, 318, 3);
         lower_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon("time span.png");
+        avatar = new ImageIcon("timeless.png");
         image_panel = new JPanel();
         image_panel.setLayout(null);
         image_panel_piclabel = new JLabel();
@@ -71,7 +72,15 @@ public class Timeless implements ActionListener {
         image_panel.setFocusable(false);
         image_panel.setOpaque(true);
         image_panel.setBorder(new RoundedBorder(10));
-        image_panel.setBounds(125,230,150,150);
+        image_panel.setBounds(135,250,150,150);
+
+        JTextPane text = new JTextPane();
+        text.setText("The timeless election shall have an 'End Election' button requiring administrative credentials to End Election process.");
+        text.setFont(new Font("Calibri",Font.BOLD,18));
+       // text.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        text.setEditable(false);
+        text.setBounds(393,250,250,120);
+        frame.add(text);
 
         back_btn = new JButton();
         back_icon = new ImageIcon("back.png");
@@ -84,24 +93,34 @@ public class Timeless implements ActionListener {
         back_btn.setBorder(null);
         back_btn.addActionListener(this);
 
+        proceed_btn = new JButton();
+        proceed_btn.setText("Proceed");
+        proceed_btn.setFocusable(false);
+        proceed_btn.setContentAreaFilled(false);
+        proceed_btn.setOpaque(false);
+        proceed_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        proceed_btn.setBounds(415,390,200,30);
+        proceed_btn.setBorder(new RoundedBorder(20));
+        proceed_btn.addActionListener(this);
+
         frame.add(elect_heading);
         frame.add(main_title);
         frame.add(upper_line);
         frame.add(image_panel);
         frame.add(back_btn);
+        frame.add(proceed_btn);
         frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if(){
-//
-//
-//        }
-//        else if(e.getSource() == back_btn){
-//            new ElectionFrame();
-//            frame.dispose();
-//
-//        }
+        if(e.getSource() == proceed_btn){
+            new CastVote("Timeless");
+            frame.dispose();
+        }
+        else if(e.getSource() == back_btn){
+              new ElectionFrame();
+              frame.dispose();
+        }
 
     }
 }

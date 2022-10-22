@@ -153,7 +153,7 @@ public class VoterVerification implements ActionListener {
                     System.out.println(ID+password);
                     if(user_ID_textfield.getText().equals(ID) && user_password_textfield.getText().equals(password)){
 
-                        JOptionPane.showMessageDialog(null, "Credentials Match", "Match",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Login Successful", "Credentials Match",JOptionPane.INFORMATION_MESSAGE);
                         new Positions();
                         frame.dispose();
 

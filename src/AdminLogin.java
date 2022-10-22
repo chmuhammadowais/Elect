@@ -33,7 +33,7 @@ public class AdminLogin  implements ActionListener {
         this.provoke_type = provoke;
         frame.setSize(800, 500);
         frame.setTitle("Admin Login");
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -174,7 +174,7 @@ public class AdminLogin  implements ActionListener {
                             frame.dispose();
                             if(MainFrame.frame == null){
                                 CastVote.frame.dispose();
-                                JOptionPane.showMessageDialog(null,"Voting Ended","Operation successful",JOptionPane.PLAIN_MESSAGE);
+                                JOptionPane.showMessageDialog(null,"Voting Ended","Operation successful",JOptionPane.INFORMATION_MESSAGE);
                             }
                             else if(CastVote.frame == null){
                                 MainFrame.frame.dispose();

@@ -28,9 +28,6 @@ public class CastVote implements ActionListener {
         frame.setSize(800,500);
         frame.setTitle("Voting Panel");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        if(implementation_type.equals("Timed")){
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        }
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -85,18 +82,21 @@ public class CastVote implements ActionListener {
 
         if(implementation_type.equals("Timeless")){
             end_btn = new JButton();
-            ImageIcon end_icon = new ImageIcon("end.png");
-            end_btn.setIcon(end_icon);
-            end_btn.setBounds(0,0,50,50);
+            end_btn.setText("End");
             end_btn.setFocusable(false);
             end_btn.setContentAreaFilled(false);
             end_btn.setOpaque(false);
+            end_btn.setFont(new Font("Calibri", Font.BOLD, 17));
+            end_btn.setBorder(new RoundedBorder(20));
             end_btn.addActionListener(this);
+
+            cast_btn.setBounds(420, 400, 200, 30);
+            end_btn.setBounds(180,400,200,30);
             frame.add(end_btn);
         }
         frame.add(elect_heading);
         frame.add(user_ID);
-        //this.add(upper_line);
+        frame.add(upper_line);
         frame.add(pic_panel);
         frame.add(cast_btn);
         frame.setVisible(true);
@@ -106,10 +106,8 @@ public class CastVote implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == cast_btn){
             new VoterVerification();
-//            frame.dispose();
         } else if (e.getSource() == end_btn) {
             new AdminLogin("verification");
-
         }
 
     }
