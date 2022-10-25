@@ -167,16 +167,15 @@ public class AdminLogin  implements ActionListener {
                     if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
                         if(this.provoke_type.equals("MainFrame")){
                             frame.dispose();
-
                             new MainFrame();
                         }
                         else if(this.provoke_type.equals("verification")){
                             frame.dispose();
-                            if(MainFrame.frame == null){
+                            if(CastVote.frame != null){
                                 CastVote.frame.dispose();
                                 JOptionPane.showMessageDialog(null,"Voting Ended","Operation successful",JOptionPane.INFORMATION_MESSAGE);
                             }
-                            else if(CastVote.frame == null){
+                            else if(MainFrame.frame != null){
                                 MainFrame.frame.dispose();
                                 new AdminSignupDelete();
                             }

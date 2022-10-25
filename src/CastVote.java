@@ -27,7 +27,7 @@ public class CastVote implements ActionListener {
         frame = new JFrame();
         frame.setSize(800,500);
         frame.setTitle("Voting Panel");
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -92,13 +92,14 @@ public class CastVote implements ActionListener {
 
             cast_btn.setBounds(420, 400, 200, 30);
             end_btn.setBounds(180,400,200,30);
-            frame.add(end_btn);
+
         }
         frame.add(elect_heading);
         frame.add(user_ID);
         frame.add(upper_line);
         frame.add(pic_panel);
         frame.add(cast_btn);
+        frame.add(end_btn);
         frame.setVisible(true);
     }
 
@@ -106,8 +107,10 @@ public class CastVote implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == cast_btn){
             new VoterVerification();
-        } else if (e.getSource() == end_btn) {
+        }
+        else if (e.getSource() == end_btn) {
             new AdminLogin("verification");
+
         }
 
     }

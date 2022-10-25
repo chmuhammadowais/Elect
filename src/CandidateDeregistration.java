@@ -264,6 +264,10 @@ public class CandidateDeregistration implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Candidate Information not found.","Error",JOptionPane.ERROR_MESSAGE);
                 System.out.println("Exception : "+ex);
             }
+            catch (Exception ex){
+                JOptionPane.showMessageDialog(null,"Error in input fields.","Error",JOptionPane.ERROR_MESSAGE);
+                System.out.println("Exception : "+ex);
+            }
         } else if (e.getSource() == back_btn) {
             new CandidatteManagement();
             frame.dispose();

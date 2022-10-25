@@ -226,6 +226,9 @@ JFrame frame;
             } catch (ClassNotFoundException | SQLException | IOException ex) {
                 JOptionPane.showMessageDialog(null,"User ID not found in registered users list, Thus cannot be registered as a Candidate","Error",JOptionPane.ERROR_MESSAGE);
                 System.out.println("Exception : "+ex);
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null,"Error in input fields.","Error",JOptionPane.ERROR_MESSAGE);
+                System.out.println("Exception : "+ex);
             }
             avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
             pic_panel_def_pic.setIcon(avatar);
