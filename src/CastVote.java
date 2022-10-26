@@ -89,9 +89,9 @@ public class CastVote implements ActionListener {
             end_btn.setFont(new Font("Calibri", Font.BOLD, 17));
             end_btn.setBorder(new RoundedBorder(20));
             end_btn.addActionListener(this);
-
             cast_btn.setBounds(420, 400, 200, 30);
             end_btn.setBounds(180,400,200,30);
+            frame.add(end_btn);
 
         }
         frame.add(elect_heading);
@@ -99,7 +99,7 @@ public class CastVote implements ActionListener {
         frame.add(upper_line);
         frame.add(pic_panel);
         frame.add(cast_btn);
-        frame.add(end_btn);
+
         frame.setVisible(true);
     }
 

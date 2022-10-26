@@ -19,6 +19,7 @@ public class VoterVerification implements ActionListener {
     JButton back_btn;
     ImageIcon back_icon;
     JFrame frame;
+    static int Voter_ID;
     public VoterVerification(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -143,22 +144,43 @@ public class VoterVerification implements ActionListener {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
                 String username_textfieldText = user_ID_textfield.getText();
-                PreparedStatement ps = con.prepareStatement("select ID, Password from Users where ID=?");
+                PreparedStatement ps = con.prepareStatement("select ID, Password from users where ID=?");
                 try {
                     ps.setString(1, username_textfieldText);
                     ResultSet rs = ps.executeQuery();
                     rs.next();
-                    String ID = rs.getString("ID");
+                    String username = rs.getString("ID");
                     String password = rs.getString("Password");
-                    System.out.println(ID+password);
-                    if(user_ID_textfield.getText().equals(ID) && user_password_textfield.getText().equals(password)){
 
-                        JOptionPane.showMessageDialog(null, "Login Successful", "Credentials Match",JOptionPane.INFORMATION_MESSAGE);
-                        new Positions();
-                        frame.dispose();
+                    if(user_ID_textfield.getText().equals(username) && user_password_textfield.getText().equals(password)){
+                        Voter_ID = Integer.parseInt(user_ID_textfield.getText());
 
+                        try{
+                            PreparedStatement ps1 = con.prepareStatement("select VoterID, Candidate from Votes where VoterID=?");
+                            try{
+                                ps1.setInt(1,Voter_ID);
+                                ResultSet rs1 = ps1.executeQuery();
+                                rs1.next();
+                                String username1 = rs1.getString("VoterID");
+                                String password1 = rs1.getString("Candidate");
+
+                                if(username1 != null && password1 != null){
+                                    JOptionPane.showMessageDialog(null,"The user has already casted vote.","Duplicate Entry",JOptionPane.ERROR_MESSAGE);
+                                    user_ID_textfield.setText(null);
+                                    user_password_textfield.setText(null);
+                                }
+                            }
+                            catch(Exception ex){
+                                frame.dispose();
+                                new Positions();
+                                System.out.println("Exception : "+ex);
+                            }
+                        }
+                        catch(Exception ex){
+                            System.out.println("Exception : "+ex);
+                        }
                     }
-                    else if(user_ID_textfield.getText().equals(ID) && !user_password_textfield.getText().equals(password)){
+                    else if(user_ID_textfield.getText().equals(username) && !user_password_textfield.getText().equals(password)){
                         JOptionPane.showMessageDialog(null, "Invalid Password", "Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
@@ -171,11 +193,12 @@ public class VoterVerification implements ActionListener {
                     user_password_textfield.setText(null);
                     System.out.println("Exception : "+ex);
 
+
                 }
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("Exception : "+ex);
             }
-        }
+            }
         else if (e.getSource() == back_btn){
             frame.dispose();
         }

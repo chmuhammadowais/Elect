@@ -15,7 +15,7 @@ public class OptionCreator implements ActionListener {
     ButtonGroup btn_grp;
     JButton vote_button;
     JScrollPane sp;
-    JFrame frame;
+    static JFrame frame;
     public OptionCreator(String post_to_retrieve){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -93,7 +93,7 @@ public class OptionCreator implements ActionListener {
                     panel.setPreferredSize(new Dimension(300,50));
                     container.add(panel);
 
-                    System.out.println(Name+post);
+//                    System.out.println(Name+post);
                     panel_creation_counter++;
                 }
 
@@ -146,7 +146,6 @@ public class OptionCreator implements ActionListener {
                     if(CastVote.frame == null){
                         new CastVote("Timeless");
                     }
-
                 }
             }
             catch(Exception ex){
