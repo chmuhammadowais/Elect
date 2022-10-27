@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
+import java.sql.*;
 import java.awt.Color;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -191,52 +188,71 @@ JFrame frame;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == reg_btn){
+        if(e.getSource() == reg_btn) {
             try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
-            System.out.println("Connection succeed");
-            String id = user_id_textfield.getText();
-            String name = user_name_textfield.getText();
-            String email = user_standing_post_textfield.getText();
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
+                System.out.println("Connection succeed");
+                String id = user_id_textfield.getText();
+                String name = user_name_textfield.getText();
+                String post = user_standing_post_textfield.getText();
+                try {
+                    PreparedStatement ps0 = con.prepareStatement("select ID, Name from users where ID=?");
+                    ps0.setInt(1, Integer.parseInt(id));
+                    ResultSet rs1 = ps0.executeQuery();
+                    rs1.next();
+                    String ID = rs1.getString("ID");
+                    String Name = rs1.getString("Name");
+                    if (user_id_textfield.getText().equals(ID) && user_name_textfield.getText().equals(Name)) {
+                        try {
 
-                PreparedStatement ps = con.prepareStatement("insert into Candidates values(?,?,?,?)");
-                ps.setInt(1, Integer.parseInt(id));
-                ps.setString(2,name);
-                ps.setString(3,email);
-                FileInputStream fis = null;
+                            PreparedStatement ps = con.prepareStatement("insert into Candidates values(?,?,?,?)");
+                            ps.setInt(1, Integer.parseInt(id));
+                            ps.setString(2, name);
+                            ps.setString(3, post);
+                            FileInputStream fis = null;
 
-                if(pic_path_label.getText() != null){
-                     fis = new FileInputStream(pic_path_label.getText());
+                            if (pic_path_label.getText() != null) {
+                                fis = new FileInputStream(pic_path_label.getText());
 
+                            } else if (pic_path_label.getText() == null) {
+                                fis = new FileInputStream("avatar.png");
+                            }
+
+                            assert fis != null;
+                            ps.setBinaryStream(4, fis, fis.available());
+                            ps.executeUpdate();
+
+                            JOptionPane.showMessageDialog(null, "Information stored successfully", "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
+
+
+                        } catch (SQLException | NumberFormatException | IOException | HeadlessException ex) {
+                            JOptionPane.showMessageDialog(null, "User ID not found in registered users list or already exists. Thus, cannot be registered as a Candidate", "Error", JOptionPane.ERROR_MESSAGE);
+                            System.out.println("Exception : " + ex);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "Error in input fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                            System.out.println("Exception : " + ex);
+                        }
+                        avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+                        pic_panel_def_pic.setIcon(avatar);
+                        pic_path_label.setText(null);
+
+
+                    } else {
+                        System.out.println("Problem with credentials");
+                        JOptionPane.showMessageDialog(null,"Problem with the entered credentials.","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    user_id_textfield.setText(null);
+                    user_name_textfield.setText(null);
+                    user_standing_post_textfield.setText(null);
+                } catch (Exception ex) {
+                    System.out.println("Exception : "+ex);
                 }
-                else if(pic_path_label.getText() == null){
-                     fis = new FileInputStream("avatar.png");
-                }
 
-                assert fis != null;
-                ps.setBinaryStream(4 ,fis, fis.available());
-                ps.executeUpdate();
-
-                JOptionPane.showMessageDialog(null, "Information stored successfully", "Operation Successful",JOptionPane.INFORMATION_MESSAGE);
-
-
-
-            } catch (ClassNotFoundException | SQLException | IOException ex) {
-                JOptionPane.showMessageDialog(null,"User ID not found in registered users list, Thus cannot be registered as a Candidate","Error",JOptionPane.ERROR_MESSAGE);
-                System.out.println("Exception : "+ex);
-            } catch (Exception ex){
-                JOptionPane.showMessageDialog(null,"Error in input fields.","Error",JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("Exception : "+ex);
             }
-            avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
-            pic_panel_def_pic.setIcon(avatar);
-            pic_path_label.setText(null);
-            user_id_textfield.setText(null);
-            user_name_textfield.setText(null);
-            user_standing_post_textfield.setText(null);
-
         }
         else if(e.getSource() == pic_chooser_btn){
             JFileChooser file = new JFileChooser();

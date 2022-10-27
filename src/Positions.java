@@ -151,24 +151,7 @@ public class Positions implements ActionListener {
             catch(ClassNotFoundException ex){
                 System.out.println("Exception : "+ex);
             }
-            Connection con;
-            try{
-                int VoterID = VoterVerification.Voter_ID;
-                String Candidate = btn_grp.getSelection().getActionCommand();
-                con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
-                PreparedStatement ps = con.prepareStatement("insert into Votes values(?,?)");
 
-                    ps.setInt(1,VoterID);
-                    ps.setString(2,Candidate);
-                    ps.executeUpdate();
-
-
-            }   catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,"Vote already casted, cannot caste vote more than once.","Error casting vote",JOptionPane.ERROR_MESSAGE);
-                OptionCreator.frame.dispose();
-                Positions.frame.dispose();
-                System.out.println("Exception : "+ex);
-            }
         }
     }
 }

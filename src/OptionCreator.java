@@ -140,6 +140,24 @@ public class OptionCreator implements ActionListener {
             try{
                 System.out.println(btn_grp.getSelection().getActionCommand());
                 frame.dispose();
+                Connection con;
+                try{
+                    int VoterID = VoterVerification.Voter_ID;
+                    String Candidate = btn_grp.getSelection().getActionCommand();
+                    con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+                    PreparedStatement ps = con.prepareStatement("insert into Votes values(?,?)");
+
+                    ps.setInt(1,VoterID);
+                    ps.setString(2,Candidate);
+                    ps.executeUpdate();
+
+
+                }   catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null,"Vote already casted, cannot caste vote more than once.","Error casting vote",JOptionPane.ERROR_MESSAGE);
+                    OptionCreator.frame.dispose();
+                    Positions.frame.dispose();
+                    System.out.println("Exception : "+ex);
+                }
                 if(Positions.counter_for_btngrp == 0){
                     JOptionPane.showMessageDialog(null, "Vote Cast Successful","Vote Casted",JOptionPane.INFORMATION_MESSAGE);
                     Positions.frame.dispose();
