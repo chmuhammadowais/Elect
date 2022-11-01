@@ -116,6 +116,7 @@ public class MainFrame implements ActionListener {
           }
           else if(e.getSource() == result_btn){
               frame.dispose();
+              new Results();
               result_btn.setEnabled(false);
           }
           else if(e.getSource() == adm_signupdete_btn){

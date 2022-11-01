@@ -161,7 +161,7 @@ public class AdminLogin  implements ActionListener {
                     ps.setString(1, username_textfieldText);
                     ResultSet rs = ps.executeQuery();
                     rs.next();
-                        String username = rs.getString("Username");
+                       String username = rs.getString("Username");
                         String password = rs.getString("Password");
 
                     if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){

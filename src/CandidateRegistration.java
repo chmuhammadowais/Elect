@@ -247,6 +247,7 @@ JFrame frame;
                     user_name_textfield.setText(null);
                     user_standing_post_textfield.setText(null);
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,"Integer type required for ID.","Error",JOptionPane.ERROR_MESSAGE);
                     System.out.println("Exception : "+ex);
                 }
 

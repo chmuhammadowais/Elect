@@ -26,7 +26,7 @@ public class RegisteredCandidates implements ActionListener {
         }
         frame = new JFrame();
         frame.setSize(800,500);
-        frame.setTitle("Candidate Registration / Deregistration Panel");
+        frame.setTitle("Registered Candidates Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
