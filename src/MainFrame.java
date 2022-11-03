@@ -14,6 +14,7 @@ public class MainFrame implements ActionListener {
     JLabel welcome_title;
     JPanel upper_line;
     static JFrame frame;
+    JButton logout_btn;
     public MainFrame(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -59,7 +60,7 @@ public class MainFrame implements ActionListener {
         cand_mgmt_btn.setContentAreaFilled(false);
         cand_mgmt_btn.setOpaque(false);
         cand_mgmt_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        cand_mgmt_btn.setBounds(165,230,215,50);
+        cand_mgmt_btn.setBounds(165,250,215,50);
         cand_mgmt_btn.setBorder(new RoundedBorder(20));
         cand_mgmt_btn.addActionListener(this);
 
@@ -69,7 +70,7 @@ public class MainFrame implements ActionListener {
         elec_start_btn.setContentAreaFilled(false);
         elec_start_btn.setOpaque(false);
         elec_start_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        elec_start_btn.setBounds(420,230,215,50);
+        elec_start_btn.setBounds(420,250,215,50);
         elec_start_btn.setBorder(new RoundedBorder(20));
         elec_start_btn.addActionListener(this);
 
@@ -79,7 +80,7 @@ public class MainFrame implements ActionListener {
         result_btn.setContentAreaFilled(false);
         result_btn.setOpaque(false);
         result_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        result_btn.setBounds(165,314,215,50);
+        result_btn.setBounds(165,334,215,50);
         result_btn.setBorder(new RoundedBorder(20));
         result_btn.addActionListener(this);
 
@@ -89,10 +90,21 @@ public class MainFrame implements ActionListener {
         adm_signupdete_btn.setContentAreaFilled(false);
         adm_signupdete_btn.setOpaque(false);
         adm_signupdete_btn.setFont(new Font("Calibri",Font.BOLD,17));
-        adm_signupdete_btn.setBounds(420,314,215,50);
+        adm_signupdete_btn.setBounds(420,334,215,50);
         adm_signupdete_btn.setBorder(new RoundedBorder(20));
         adm_signupdete_btn.addActionListener(this);
 
+
+        logout_btn = new JButton();
+        ImageIcon logout = new ImageIcon("logout.png");
+        logout_btn.setIcon(logout);
+        logout_btn.setFocusable(false);
+        logout_btn.setContentAreaFilled(false);
+        logout_btn.setOpaque(false);
+        logout_btn.setFont(new Font("Calibri",Font.BOLD,17));
+        logout_btn.setBounds(30,410,30,30);
+        logout_btn.setBorder(null);
+        logout_btn.addActionListener(this);
 
         frame.add(elect_heading);
         frame.add(welcome_title);
@@ -101,6 +113,7 @@ public class MainFrame implements ActionListener {
         frame.add(elec_start_btn);
         frame.add(result_btn);
         frame.add(adm_signupdete_btn);
+        frame.add(logout_btn);
         frame.setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
@@ -121,7 +134,10 @@ public class MainFrame implements ActionListener {
           }
           else if(e.getSource() == adm_signupdete_btn){
               new AdminLogin("verification");
-//              frame.dispose();
+          }
+          else if(e.getSource() == logout_btn){
+              new AdminLogin("MainFrame");
+              frame.dispose();
           }
     }
 }
