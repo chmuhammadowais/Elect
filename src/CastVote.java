@@ -27,7 +27,7 @@ public class CastVote implements ActionListener {
         frame = new JFrame();
         frame.setSize(800,500);
         frame.setTitle("Voting Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setLayout(null);

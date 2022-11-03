@@ -18,8 +18,10 @@ public class AdminSignup extends JFrame implements ActionListener {
     JLabel admin_username;
     JTextField admin_username_textfield;
     JLabel admin_password;
-    JTextField admin_password_textfield;
+    JPasswordField admin_password_textfield;
     JFrame frame;
+    JButton show_password;
+    int show_counter;
 
     public AdminSignup() {
         try {
@@ -95,7 +97,8 @@ public class AdminSignup extends JFrame implements ActionListener {
         JPanel admin_password_line = new JPanel();
         admin_password_line.setBounds(325, 330, 350, 3);
         admin_password_line.setBorder(BorderFactory.createLineBorder(Color.darkGray, 3));
-        admin_password_textfield = new JTextField();
+        admin_password_textfield = new JPasswordField();
+        admin_password_textfield.setEchoChar('*');
         admin_password_textfield.setFont(new Font("Calibri", Font.PLAIN, 15));
         admin_password_textfield.setBorder(null);
         admin_password_textfield.setHorizontalAlignment(JTextField.CENTER);
@@ -122,6 +125,14 @@ public class AdminSignup extends JFrame implements ActionListener {
         sign_up_btn.setBorder(new RoundedBorder(20));
         sign_up_btn.addActionListener(this);
 
+        ImageIcon eye_icon = new ImageIcon("eye.png");
+        show_password = new JButton();
+        show_password.setIcon(eye_icon);
+        show_password.setFocusable(false);
+        show_password.setContentAreaFilled(false);
+        show_password.setBorder(null);
+        show_password.addActionListener(this);
+        show_password.setBounds(675,310,20,20);
 
         frame.add(elect_heading);
         frame.add(admin_signup_title);
@@ -135,6 +146,7 @@ public class AdminSignup extends JFrame implements ActionListener {
         frame.add(admin_password_textfield);
         frame.add(sign_up_btn);
         frame.add(back_btn);
+        frame.add(show_password);
         frame.setVisible(true);
     }
 
@@ -147,7 +159,7 @@ public class AdminSignup extends JFrame implements ActionListener {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
                 System.out.println("Connection succeed");
                 String admin_username = admin_username_textfield.getText();
-                String admin_password = admin_password_textfield.getText();
+                String admin_password = String.copyValueOf(admin_password_textfield.getPassword());
 
                 PreparedStatement ps = con.prepareStatement("insert into Admin values(?,?)");
                 ps.setString(1, admin_username);
@@ -167,6 +179,15 @@ public class AdminSignup extends JFrame implements ActionListener {
         else if(e.getSource() == back_btn){
             new AdminSignupDelete();
             this.dispose();
+        }
+        else if(e.getSource() == show_password){
+            if(show_counter%2 ==0){
+                admin_password_textfield.setEchoChar('*');
+            }
+            else{
+                admin_password_textfield.setEchoChar((char)0);
+            }
+            show_counter++;
         }
     }
 }

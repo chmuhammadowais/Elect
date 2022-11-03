@@ -17,12 +17,13 @@ public class AdminLogin  implements ActionListener {
     JLabel admin_username;
     JTextField admin_username_textfield;
     JLabel admin_password;
-    JTextField admin_password_textfield;
+    JPasswordField admin_password_textfield;
     JButton back_btn;
     ImageIcon back_icon;
     String provoke_type;
     JFrame frame;
-
+    JButton show_password;
+    int show_counter;
     public AdminLogin(String provoke) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -98,11 +99,21 @@ public class AdminLogin  implements ActionListener {
         JPanel admin_password_line = new JPanel();
         admin_password_line.setBounds(325, 330, 350, 3);
         admin_password_line.setBorder(BorderFactory.createLineBorder(Color.darkGray, 3));
-        admin_password_textfield = new JTextField();
+        admin_password_textfield = new JPasswordField();
+        admin_password_textfield.setEchoChar('*');
         admin_password_textfield.setFont(new Font("Calibri", Font.PLAIN, 15));
         admin_password_textfield.setBorder(null);
         admin_password_textfield.setHorizontalAlignment(JTextField.CENTER);
         admin_password_textfield.setBounds(405, 310, 270, 20);
+
+        ImageIcon eye_icon = new ImageIcon("eye.png");
+        show_password = new JButton();
+        show_password.setIcon(eye_icon);
+        show_password.setFocusable(false);
+        show_password.setContentAreaFilled(false);
+        show_password.setBorder(null);
+        show_password.addActionListener(this);
+        show_password.setBounds(675,310,20,20);
 
         login_btn = new JButton();
         login_btn.setText("Login");
@@ -145,6 +156,7 @@ public class AdminLogin  implements ActionListener {
         frame.add(admin_password_line);
         frame.add(admin_password_textfield);
         frame.add(login_btn);
+        frame.add(show_password);
         frame.setVisible(true);
     }
 
@@ -163,8 +175,7 @@ public class AdminLogin  implements ActionListener {
                     rs.next();
                        String username = rs.getString("Username");
                         String password = rs.getString("Password");
-
-                    if(admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)){
+                    if(admin_username_textfield.getText().equals(username) && String.copyValueOf(admin_password_textfield.getPassword()).equals(password)){
                         if(this.provoke_type.equals("MainFrame")){
                             frame.dispose();
                             new MainFrame();
@@ -183,7 +194,7 @@ public class AdminLogin  implements ActionListener {
 
                         frame.dispose();
                     }
-                    else if(admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password)){
+                    else if(admin_username_textfield.getText().equals(username) && !String.copyValueOf(admin_password_textfield.getPassword()).equals(password)){
                         JOptionPane.showMessageDialog(null, "Invalid Password", "Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
@@ -203,8 +214,16 @@ public class AdminLogin  implements ActionListener {
             }
         }
         else if(e.getSource() == back_btn){
-//            new MainFrame();
             frame.dispose();
+        }
+        else if(e.getSource()== show_password){
+            if(show_counter %2 == 0){
+                admin_password_textfield.setEchoChar((char)0);
+            }
+            else{
+                admin_password_textfield.setEchoChar('*');
+            }
+            show_counter ++;
         }
     }
 }

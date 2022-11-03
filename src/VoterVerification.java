@@ -14,11 +14,13 @@ public class VoterVerification implements ActionListener {
     JPanel pic_panel;
     JLabel pic_panel_def_pic;
     JTextField user_ID_textfield;
-    JTextField user_password_textfield;
+    JPasswordField user_password_textfield;
     JButton login_btn;
     JButton back_btn;
     ImageIcon back_icon;
     JFrame frame;
+    JButton show_password;
+    int show_counter;
     static int Voter_ID;
     public VoterVerification(){
         try {
@@ -29,7 +31,7 @@ public class VoterVerification implements ActionListener {
         frame = new JFrame();
         frame.setSize(800, 500);
         frame.setTitle("User Verification");
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -94,11 +96,21 @@ public class VoterVerification implements ActionListener {
         JPanel user_password_line = new JPanel();
         user_password_line.setBounds(325, 330, 350, 3);
         user_password_line.setBorder(BorderFactory.createLineBorder(Color.darkGray, 3));
-        user_password_textfield = new JTextField();
+        user_password_textfield = new JPasswordField();
+        user_password_textfield.setEchoChar('*');
         user_password_textfield.setFont(new Font("Calibri", Font.PLAIN, 15));
         user_password_textfield.setBorder(null);
         user_password_textfield.setHorizontalAlignment(JTextField.CENTER);
         user_password_textfield.setBounds(405, 310, 270, 20);
+
+        ImageIcon eye_icon = new ImageIcon("eye.png");
+        show_password = new JButton();
+        show_password.setIcon(eye_icon);
+        show_password.setFocusable(false);
+        show_password.setContentAreaFilled(false);
+        show_password.setBorder(null);
+        show_password.addActionListener(this);
+        show_password.setBounds(675,310,20,20);
 
         back_btn = new JButton();
         back_icon = new ImageIcon("back.png");
@@ -134,6 +146,7 @@ public class VoterVerification implements ActionListener {
         frame.add(user_password_textfield);
         frame.add(login_btn);
         frame.add(back_btn);
+        frame.add(show_password);
         frame.setVisible(true);
     }
     @Override
@@ -152,7 +165,7 @@ public class VoterVerification implements ActionListener {
                     String username = rs.getString("ID");
                     String password = rs.getString("Password");
 
-                    if(user_ID_textfield.getText().equals(username) && user_password_textfield.getText().equals(password)){
+                    if(user_ID_textfield.getText().equals(username) && String.copyValueOf(user_password_textfield.getPassword()).equals(password)){
                         Voter_ID = Integer.parseInt(user_ID_textfield.getText());
 
                         try{
@@ -180,7 +193,7 @@ public class VoterVerification implements ActionListener {
                             System.out.println("Exception : "+ex);
                         }
                     }
-                    else if(user_ID_textfield.getText().equals(username) && !user_password_textfield.getText().equals(password)){
+                    else if(user_ID_textfield.getText().equals(username) && !String.copyValueOf(user_password_textfield.getPassword()).equals(password)){
                         JOptionPane.showMessageDialog(null, "Invalid Password", "Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
@@ -202,5 +215,14 @@ public class VoterVerification implements ActionListener {
         else if (e.getSource() == back_btn){
             frame.dispose();
         }
-    }
+        else if(e.getSource() == show_password){
+            if(show_counter %2 == 0){
+                user_password_textfield.setEchoChar((char)0);
+            }
+            else{
+                user_password_textfield.setEchoChar('*');
+            }
+            show_counter ++;
+        }
+        }
 }

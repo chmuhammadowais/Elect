@@ -18,8 +18,10 @@ public class AdminDelete  implements ActionListener {
     JLabel admin_username;
     JTextField admin_username_textfield;
     JLabel admin_password;
-    JTextField admin_password_textfield;
+    JPasswordField admin_password_textfield;
     JFrame frame;
+    JButton show_password;
+    int show_counter;
     public AdminDelete() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -94,7 +96,8 @@ public class AdminDelete  implements ActionListener {
         JPanel admin_password_line = new JPanel();
         admin_password_line.setBounds(325, 330, 350, 3);
         admin_password_line.setBorder(BorderFactory.createLineBorder(Color.darkGray, 3));
-        admin_password_textfield = new JTextField();
+        admin_password_textfield = new JPasswordField();
+        admin_password_textfield.setEchoChar('*');
         admin_password_textfield.setFont(new Font("Calibri", Font.PLAIN, 15));
         admin_password_textfield.setBorder(null);
         admin_password_textfield.setHorizontalAlignment(JTextField.CENTER);
@@ -121,6 +124,14 @@ public class AdminDelete  implements ActionListener {
         delete_btn.setBorder(new RoundedBorder(20));
         delete_btn.addActionListener(this);
 
+        ImageIcon eye_icon = new ImageIcon("eye.png");
+        show_password = new JButton();
+        show_password.setIcon(eye_icon);
+        show_password.setFocusable(false);
+        show_password.setContentAreaFilled(false);
+        show_password.setBorder(null);
+        show_password.addActionListener(this);
+        show_password.setBounds(675,310,20,20);
 
         frame.add(elect_heading);
         frame.add(admin_delete_title);
@@ -134,6 +145,7 @@ public class AdminDelete  implements ActionListener {
         frame.add(admin_password_textfield);
         frame.add(delete_btn);
         frame.add(back_btn);
+        frame.add(show_password);
         frame.setVisible(true);
     }
 
@@ -159,7 +171,7 @@ public class AdminDelete  implements ActionListener {
                             String username = rs1.getString("Username");
                             String password = rs1.getString("Password");
 
-                            if (admin_username_textfield.getText().equals(username) && admin_password_textfield.getText().equals(password)) {
+                            if (admin_username_textfield.getText().equals(username) && String.copyValueOf(admin_password_textfield.getPassword()).equals(password)) {
                                 PreparedStatement ps2 = con.prepareStatement("delete from Admin where Username=?");
                                 try {
                                     ps2.setString(1, admin_username_textfield.getText());
@@ -172,10 +184,9 @@ public class AdminDelete  implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Administrator Not Found", "Success", JOptionPane.ERROR_MESSAGE);
                                     System.out.println("Exception : " + ex);
                                 }
-                            } else if ((admin_username_textfield.getText().equals(username) && !admin_password_textfield.getText().equals(password))) {
-                                JOptionPane.showMessageDialog(null, "Invalid Credentials", "Success", JOptionPane.ERROR_MESSAGE);
+                            } else if ((admin_username_textfield.getText().equals(username) && !String.copyValueOf(admin_password_textfield.getPassword()).equals(password))) {
+                                JOptionPane.showMessageDialog(null, "Invalid Password", "Success", JOptionPane.ERROR_MESSAGE);
                             }
-
 
                         } catch (SQLException ex) {
                             JOptionPane.showMessageDialog(null, "Administrator Not Found ", "Success", JOptionPane.ERROR_MESSAGE);
@@ -201,6 +212,15 @@ public class AdminDelete  implements ActionListener {
         else if(e.getSource() == back_btn){
             new AdminSignupDelete();
             frame.dispose();
+        }
+        else if(e.getSource() == show_password){
+            if(show_counter%2 ==0){
+                admin_password_textfield.setEchoChar('*');
+            }
+            else{
+                admin_password_textfield.setEchoChar((char)0);
+            }
+            show_counter++;
         }
     }
 }
