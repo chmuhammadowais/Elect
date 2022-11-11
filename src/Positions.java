@@ -13,7 +13,7 @@ public class Positions implements ActionListener {
     JPanel upper_line;
     JPanel container;
     JScrollPane sp;
-    ButtonGroup btn_grp;
+    static ButtonGroup btn_grp;
     JRadioButton pos_btn;
     JButton proceed_btn;
     ImageIcon proceed;

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.LinkedList;
 
 public class OptionCreator implements ActionListener {
     String post_to_retrieve;
@@ -137,6 +138,7 @@ public class OptionCreator implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == vote_button){
+            Positions.btn_grp.clearSelection();
             try{
                 System.out.println(btn_grp.getSelection().getActionCommand());
                 frame.dispose();
@@ -151,7 +153,7 @@ public class OptionCreator implements ActionListener {
                     ps.setString(2,Candidate);
                     ps.executeUpdate();
 
-
+                 notify_admin();
                 }   catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null,"Vote already casted, cannot caste vote more than once.","Error casting vote",JOptionPane.ERROR_MESSAGE);
                     OptionCreator.frame.dispose();
@@ -172,5 +174,38 @@ public class OptionCreator implements ActionListener {
             }
 
         }
+    }
+    public void notify_admin(){
+        try{
+            LinkedList<String> admins = new LinkedList<>();
+            Connection con;
+            try{
+                con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
+                PreparedStatement ps = con.prepareStatement("select username from Admin");
+
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    String admin = rs.getString("username");
+                    admins.add(admin);
+                }
+
+                for (String ad : admins) {
+                    System.out.println("-----------------------------------");
+                    System.out.println("Administrator "+ad);
+                    update_admin();
+                    System.out.println("-----------------------------------");
+                }
+            }   catch (SQLException ex) {
+                System.out.println("Exception : " + ex);
+            }
+        }
+        catch(Exception ex){
+            System.out.println("Exception : "+ex);
+        }
+    }
+    public void update_admin(){
+        System.out.println("Notification for : Vote cast");
+        System.out.println("User ID : "+VoterVerification.Voter_ID +" voted for "+btn_grp.getSelection().getActionCommand());
+
     }
 }
