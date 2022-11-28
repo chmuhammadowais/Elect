@@ -40,10 +40,10 @@ public class CandidateDeregistration implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -88,7 +88,7 @@ public class CandidateDeregistration implements ActionListener {
         dereg_btn.setBorder(new RoundedBorder(20));
         dereg_btn.addActionListener(this);
 
-        avatar = new ImageIcon(new ImageIcon("shredder.jpg").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        avatar = new ImageIcon(new ImageIcon("./src/Resources/shredder.jpg").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         pic_panel = new JPanel();
         pic_panel.setLayout(null);
         pic_panel_def_pic = new JLabel();
@@ -103,7 +103,7 @@ public class CandidateDeregistration implements ActionListener {
         pic_panel.setBounds(125,230,150,150);
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);
@@ -159,7 +159,7 @@ public class CandidateDeregistration implements ActionListener {
 
             confirmation_frame = new JFrame();
             confirmation_frame.setTitle("Confirmation");
-            ImageIcon logo = new ImageIcon("logo.png");
+            ImageIcon logo = new ImageIcon("./src/Resources/logo.png");
             confirmation_frame.setIconImage(logo.getImage());
             confirmation_frame.setSize(650,300);
             confirmation_frame.getContentPane().setBackground(Color.white);
@@ -167,7 +167,7 @@ public class CandidateDeregistration implements ActionListener {
             confirmation_frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             confirmation_frame.setLocationRelativeTo(null);
             confirmation_frame.setResizable(false);
-            ImageIcon bin = new ImageIcon("bin.png");
+            ImageIcon bin = new ImageIcon("./src/Resources/bin.png");
             dereg_conf = new JButton();
             dereg_conf.setIcon(bin);
             dereg_conf.setFocusable(false);
@@ -179,7 +179,7 @@ public class CandidateDeregistration implements ActionListener {
             dereg_conf.addActionListener(this);
             dereg_conf.setBounds(570,225,30,30);
 
-            ImageIcon cancel = new ImageIcon("cancel.png");
+            ImageIcon cancel = new ImageIcon("./src/Resources/cancel.png");
             dereg_cancel = new  JButton();
             dereg_cancel.setIcon(cancel);
             dereg_cancel.setFocusable(false);

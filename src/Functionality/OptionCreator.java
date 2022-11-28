@@ -34,10 +34,10 @@ public class OptionCreator implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri", Font.BOLD, 32));
@@ -62,7 +62,7 @@ public class OptionCreator implements ActionListener {
         container.setLayout(new FlowLayout());
         container.setBackground(Color.white);
        // container.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        ImageIcon selected = new ImageIcon("check.png");
+        ImageIcon selected = new ImageIcon("./src/Resources/check.png");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");

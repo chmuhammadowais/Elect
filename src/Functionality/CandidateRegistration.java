@@ -48,10 +48,10 @@ JFrame frame;
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -72,7 +72,7 @@ JFrame frame;
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        avatar = new ImageIcon(new ImageIcon("./src/Resources/avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         pic_panel = new JPanel();
         pic_panel.setLayout(null);
         pic_panel_def_pic = new JLabel();
@@ -157,7 +157,7 @@ JFrame frame;
         pic_path_label.setBounds(125,385,150,15);
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);
@@ -226,7 +226,7 @@ JFrame frame;
                             fis = new FileInputStream(pic_path_label.getText());
 
                         } else if (pic_path_label.getText() == null) {
-                            fis = new FileInputStream("avatar.png");
+                            fis = new FileInputStream("./src/Resources/avatar.png");
                         }
 
                         assert fis != null;
@@ -234,7 +234,7 @@ JFrame frame;
                         ps.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Information stored successfully", "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-                        avatar = new ImageIcon(new ImageIcon("avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+                        avatar = new ImageIcon(new ImageIcon("./src/Resources/avatar.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
                         pic_panel_def_pic.setIcon(avatar);
                         pic_path_label.setText(null);
                         user_id_textfield.setText(null);

@@ -34,11 +34,11 @@ public class CandidatteManagement  implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -60,7 +60,7 @@ public class CandidatteManagement  implements ActionListener {
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        reg_icon = new ImageIcon("register.png");
+        reg_icon = new ImageIcon("./src/Resources/register.png");
         reg_btn = new JButton();
         reg_btn.setIcon(reg_icon);
         reg_btn.setText("Register Candidate");
@@ -75,7 +75,7 @@ public class CandidatteManagement  implements ActionListener {
         reg_btn.setIconTextGap(35);
         reg_btn.addActionListener(this);
 
-        dereg_icon= new ImageIcon("deregister.png");
+        dereg_icon= new ImageIcon("./src/Resources/deregister.png");
         dereg_btn = new JButton();
         dereg_btn.setIcon(dereg_icon);
         dereg_btn.setText("Deregister Candidate");
@@ -90,7 +90,7 @@ public class CandidatteManagement  implements ActionListener {
         dereg_btn.setIconTextGap(20);
         dereg_btn.addActionListener(this);
 
-        get_reg_cand_icon = new ImageIcon("candidate.jpg");
+        get_reg_cand_icon = new ImageIcon("./src/Resources/candidate.jpg");
         get_reg_cand_btn = new JButton();
         get_reg_cand_btn.setText("Registered Candidates");
         get_reg_cand_btn.setIcon(get_reg_cand_icon);
@@ -105,7 +105,7 @@ public class CandidatteManagement  implements ActionListener {
         get_reg_cand_btn.addActionListener(this);
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);

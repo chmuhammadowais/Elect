@@ -38,10 +38,10 @@ public class VoterVerification implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri", Font.BOLD, 32));
@@ -62,7 +62,7 @@ public class VoterVerification implements ActionListener {
         upper_line.setBounds(100, 210, 600, 3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon("verify.png");
+        avatar = new ImageIcon("./src/Resources/verify.png");
         pic_panel = new JPanel();
         pic_panel.setLayout(null);
         pic_panel_def_pic = new JLabel();
@@ -105,7 +105,7 @@ public class VoterVerification implements ActionListener {
         user_password_textfield.setHorizontalAlignment(JTextField.CENTER);
         user_password_textfield.setBounds(405, 310, 270, 20);
 
-        ImageIcon eye_icon = new ImageIcon("eye.png");
+        ImageIcon eye_icon = new ImageIcon("./src/Resources/eye.png");
         show_password = new JButton();
         show_password.setIcon(eye_icon);
         show_password.setFocusable(false);
@@ -115,7 +115,7 @@ public class VoterVerification implements ActionListener {
         show_password.setBounds(675,310,20,20);
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);

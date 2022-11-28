@@ -32,11 +32,11 @@ public class AdminSignupDelete implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -58,7 +58,7 @@ public class AdminSignupDelete implements ActionListener {
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        admin_signup_icon = new ImageIcon("admin_add.png");
+        admin_signup_icon = new ImageIcon("./src/Resources/admin_add.png");
         admin_signup_btn = new JButton();
         admin_signup_btn.setIcon(admin_signup_icon);
         admin_signup_btn.setText("Signup Administrator");
@@ -73,7 +73,7 @@ public class AdminSignupDelete implements ActionListener {
         admin_signup_btn.setIconTextGap(18);
         admin_signup_btn.addActionListener(this);
 
-        admin_delete_icon = new ImageIcon("admin_delete.png");
+        admin_delete_icon = new ImageIcon("./src/Resources/admin_delete.png");
         admin_delete_btn = new JButton();
         admin_delete_btn.setIcon(admin_delete_icon);
         admin_delete_btn.setText("Delete Administrator");
@@ -91,7 +91,7 @@ public class AdminSignupDelete implements ActionListener {
 
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);

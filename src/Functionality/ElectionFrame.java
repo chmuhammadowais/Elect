@@ -33,10 +33,10 @@ public class ElectionFrame implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -57,7 +57,7 @@ public class ElectionFrame implements ActionListener {
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        Timed_icon = new ImageIcon("timed.png");
+        Timed_icon = new ImageIcon("./src/Resources/timed.png");
         Timed_btn = new JButton();
         Timed_btn.setIcon(Timed_icon);
         Timed_btn.setText("Timed");
@@ -72,7 +72,7 @@ public class ElectionFrame implements ActionListener {
         Timed_btn.setIconTextGap(18);
         Timed_btn.addActionListener(this);
 
-        Timeless_icon = new ImageIcon("timeless.png");
+        Timeless_icon = new ImageIcon("./src/Resources/timeless.png");
         Timeless_btn = new JButton();
         Timeless_btn.setIcon(Timeless_icon);
         Timeless_btn.setText("Timeless");
@@ -90,7 +90,7 @@ public class ElectionFrame implements ActionListener {
 
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);

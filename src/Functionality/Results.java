@@ -40,11 +40,11 @@ public class Results implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -66,7 +66,7 @@ public class Results implements ActionListener {
         upper_line.setBounds(100,210,600,3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        compile_icon = new ImageIcon("compile.png");
+        compile_icon = new ImageIcon("./src/Resources/compile.png");
         compile_btn = new JButton();
         compile_btn.setText("Compiled Results");
         compile_btn.setIcon(compile_icon);
@@ -82,7 +82,7 @@ public class Results implements ActionListener {
         compile_btn.addActionListener(this);
 
         detailed_btn = new JButton();
-        detail_icon = new ImageIcon("details.png");
+        detail_icon = new ImageIcon("./src/Resources/details.png");
         detailed_btn.setText("Detailed Results");
         detailed_btn.setIcon(detail_icon);
         detailed_btn.setFocusable(false);
@@ -97,7 +97,7 @@ public class Results implements ActionListener {
 
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);
@@ -166,11 +166,11 @@ public class Results implements ActionListener {
         df.setResizable(false);
         df.setLayout(null);
         df.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         df.setIconImage(icon.getImage());
 
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -193,7 +193,7 @@ public class Results implements ActionListener {
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
         df_back = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         df_back.setIcon(back_icon);
         df_back.setFocusable(false);
         df_back.setContentAreaFilled(false);
@@ -270,10 +270,10 @@ public class Results implements ActionListener {
         df.setResizable(false);
         df.setLayout(null);
         df.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         df.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -296,7 +296,7 @@ public class Results implements ActionListener {
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
         df_back = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         df_back.setIcon(back_icon);
         df_back.setFocusable(false);
         df_back.setContentAreaFilled(false);

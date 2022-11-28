@@ -36,10 +36,10 @@ public class Positions implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -64,8 +64,8 @@ public class Positions implements ActionListener {
         container.setLayout(new FlowLayout(FlowLayout.LEADING,10,10));
         container.setBackground(Color.white);
         btn_grp = new ButtonGroup();
-        ImageIcon selected = new ImageIcon("selected.png");
-        ImageIcon unselected = new ImageIcon("unselected.png");
+        ImageIcon selected = new ImageIcon("./src/Resources/selected.png");
+        ImageIcon unselected = new ImageIcon("./src/Resources/unselected.png");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -116,7 +116,7 @@ public class Positions implements ActionListener {
 
 
         proceed_btn = new JButton();
-        proceed = new ImageIcon("forward.png");
+        proceed = new ImageIcon("./src/Resources/forward.png");
         proceed_btn.setIcon(proceed);
         proceed_btn.setFocusable(false);
         proceed_btn.setContentAreaFilled(false);
@@ -158,11 +158,5 @@ public class Positions implements ActionListener {
             System.out.println("Exception : "+e);
             return false;
         }
-//        try{
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//        }
-//        catch(ClassNotFoundException ex){
-//            System.out.println("Exception : "+ex);
-//        }
     }
 }

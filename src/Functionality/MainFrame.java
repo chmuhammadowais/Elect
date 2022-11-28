@@ -31,11 +31,11 @@ public class MainFrame implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -98,7 +98,7 @@ public class MainFrame implements ActionListener {
 
 
         logout_btn = new JButton();
-        ImageIcon logout = new ImageIcon("logout.png");
+        ImageIcon logout = new ImageIcon("./src/Resources/logout.png");
         logout_btn.setIcon(logout);
         logout_btn.setFocusable(false);
         logout_btn.setContentAreaFilled(false);

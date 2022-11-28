@@ -44,10 +44,10 @@ public class Timed implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -111,7 +111,7 @@ public class Timed implements ActionListener {
         conf_set_time_btn.setBorder(new RoundedBorder(20));
         conf_set_time_btn.addActionListener(this);
 
-        avatar = new ImageIcon("timed.png");
+        avatar = new ImageIcon("./src/Resources/timed.png");
         image_panel = new JPanel();
         image_panel.setLayout(null);
         image_panel_piclabel = new JLabel();
@@ -126,7 +126,7 @@ public class Timed implements ActionListener {
         image_panel.setBounds(135,250,150,150);
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);

@@ -34,10 +34,10 @@ public class Timeless implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri",Font.BOLD,32));
@@ -62,7 +62,7 @@ public class Timeless implements ActionListener {
         lower_line.setBounds(338, 350, 318, 3);
         lower_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon("timeless.png");
+        avatar = new ImageIcon("./src/Resources/timeless.png");
         image_panel = new JPanel();
         image_panel.setLayout(null);
         image_panel_piclabel = new JLabel();
@@ -85,7 +85,7 @@ public class Timeless implements ActionListener {
         frame.add(text);
 
         back_btn = new JButton();
-        back_icon = new ImageIcon("back.png");
+        back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);

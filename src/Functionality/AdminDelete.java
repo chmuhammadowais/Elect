@@ -38,10 +38,10 @@ public class AdminDelete  implements ActionListener {
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        icon = new ImageIcon("logo.png");
+        icon = new ImageIcon("./src/Resources/logo.png");
         frame.setIconImage(icon.getImage());
 
-        header_icon = new ImageIcon("heading.png");
+        header_icon = new ImageIcon("./src/Resources/heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
         elect_heading.setFont(new Font("Calibri", Font.BOLD, 32));
@@ -62,7 +62,7 @@ public class AdminDelete  implements ActionListener {
         upper_line.setBounds(100, 210, 600, 3);
         upper_line.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        avatar = new ImageIcon(new ImageIcon("admin_delete.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        avatar = new ImageIcon(new ImageIcon("./src/Resources/admin_delete.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         pic_panel = new JPanel();
         pic_panel.setLayout(null);
         pic_panel_def_pic = new JLabel();
@@ -106,7 +106,7 @@ public class AdminDelete  implements ActionListener {
         admin_password_textfield.setBounds(405, 310, 270, 20);
 
         back_btn = new JButton();
-        ImageIcon back_icon = new ImageIcon("back.png");
+        ImageIcon back_icon = new ImageIcon("./src/Resources/back.png");
         back_btn.setIcon(back_icon);
         back_btn.setFocusable(false);
         back_btn.setContentAreaFilled(false);
@@ -126,7 +126,7 @@ public class AdminDelete  implements ActionListener {
         delete_btn.setBorder(new RoundedBorder(20));
         delete_btn.addActionListener(this);
 
-        ImageIcon eye_icon = new ImageIcon("eye.png");
+        ImageIcon eye_icon = new ImageIcon("./src/Resources/eye.png");
         show_password = new JButton();
         show_password.setIcon(eye_icon);
         show_password.setFocusable(false);
