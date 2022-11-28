@@ -89,7 +89,7 @@ public class Timed implements ActionListener {
        // min_label.setBorder(BorderFactory.createLineBorder(Color.red));
         min_label.setBounds(493,290,73,35);
 
-        String[] Minutes = {"01","15","30","45","50"};//dynamic using arraylist
+        String[] Minutes = {"00","1","15","30","45"};//dynamic using arraylist
         min_box = new JComboBox<>(Minutes);
         min_box.setFocusable(false);
         min_box.setFont(new Font("Calibri",Font.PLAIN,15));
@@ -176,32 +176,34 @@ public class Timed implements ActionListener {
             time_confirmation_frame.setIconImage(null);
             time_confirmation_frame.setTitle("Time Confirmation Box");
             time_confirmation_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            icon = new ImageIcon("./src/Resources/logo.png");
+            time_confirmation_frame.setIconImage(icon.getImage());
             time_confirmation_frame.setLocationRelativeTo(null);
 
             JLabel hour_label = new JLabel("Hours",SwingConstants.CENTER);
             hour_label.setFont(new Font("Calibri",Font.BOLD,12));
             // hour_label.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            hour_label.setBounds(95, 60, 100, 20);
+            hour_label.setBounds(95, 80, 100, 20);
 
             JLabel hour_label_time = new JLabel((String) hour_box.getSelectedItem(),SwingConstants.CENTER);
             hour_label_time.setFont(new Font("Calibri",Font.BOLD,50));
             // hour_label_time.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            hour_label_time.setBounds(95, 0, 100, 60);
+            hour_label_time.setBounds(95, 20, 100, 60);
 
             JLabel min_label = new JLabel("Minutes",SwingConstants.CENTER);
             min_label.setFont(new Font("Calibri",Font.BOLD,12));
             // min_label.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            min_label.setBounds(205, 60, 100, 20);
+            min_label.setBounds(205, 80, 100, 20);
 
             JLabel min_label_time = new JLabel((String) min_box.getSelectedItem(),SwingConstants.CENTER);
             min_label_time.setFont(new Font("Calibri",Font.BOLD,50));
             //  min_label_time.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            min_label_time.setBounds(205, 0, 100, 60);
+            min_label_time.setBounds(205, 20, 100, 60);
 
             JLabel label_colon = new JLabel(":",SwingConstants.CENTER);
             //  label_colon.setBorder(BorderFactory.createLineBorder(Color.red));
             label_colon.setFont(new Font("Calibri",Font.BOLD,30));
-            label_colon.setBounds(195,0,10,60);
+            label_colon.setBounds(195,20,10,60);
 
             set_time_button = new JButton("Set Time");
             set_time_button.setFocusable(false);
@@ -210,7 +212,7 @@ public class Timed implements ActionListener {
             set_time_button.setFont(new Font("Calibri",Font.BOLD,17));
             set_time_button.setBorder(new RoundedBorder(5));
             set_time_button.addActionListener(this);
-            set_time_button.setBounds(100,95,200,30);
+            set_time_button.setBounds(100,120,200,30);
 
 
             // ProgramClasses.CastVote.frame.add(button);
