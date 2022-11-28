@@ -191,13 +191,13 @@ public class VoterVerification implements ActionListener {
                                     JOptionPane.showMessageDialog(null,"The user has already casted vote.","Duplicate Entry",JOptionPane.ERROR_MESSAGE);
                                     user_ID_textfield.setText(null);
                                     user_password_textfield.setText(null);
-                                    return true;
+                                    return false;
                                 }
                             }
                             catch(Exception ex){
                                 frame.dispose();
                                 new Positions();
-                                System.out.println("Exception : "+ex);
+//                                System.out.println("Exception : "+ex);
                                 return true;
                             }
                         }

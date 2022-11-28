@@ -245,14 +245,16 @@ JFrame frame;
                     } catch (SQLException | NumberFormatException | IOException | HeadlessException ex) {
                         JOptionPane.showMessageDialog(null, "User ID not found in registered users list or already exists. Thus, cannot be registered as a Candidate", "Error", JOptionPane.ERROR_MESSAGE);
                         System.out.println("Exception : " + ex);
+                        pic_path_label.setText(null);
+                        user_id_textfield.setText(null);
+                        user_name_textfield.setText(null);
+                        user_standing_post_textfield.setText(null);
                         return false;
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "Error in input fields.", "Error", JOptionPane.ERROR_MESSAGE);
                         System.out.println("Exception : " + ex);
                         return false;
                     }
-
-
 
                 } else {
                     JOptionPane.showMessageDialog(null,"Problem with the entered credentials.","Error",JOptionPane.ERROR_MESSAGE);
@@ -262,11 +264,19 @@ JFrame frame;
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,"Integer type required for ID.","Error",JOptionPane.ERROR_MESSAGE);
                 System.out.println("Exception : "+ex);
+                pic_path_label.setText(null);
+                user_id_textfield.setText(null);
+                user_name_textfield.setText(null);
+                user_standing_post_textfield.setText(null);
                 return false;
             }
 
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println("Exception : "+ex);
+            pic_path_label.setText(null);
+            user_id_textfield.setText(null);
+            user_name_textfield.setText(null);
+            user_standing_post_textfield.setText(null);
             return false;
         }
 
@@ -300,6 +310,10 @@ JFrame frame;
         }
         catch(Exception e){
             System.out.println("Exception : "+e);
+            pic_path_label.setText(null);
+            user_id_textfield.setText(null);
+            user_name_textfield.setText(null);
+            user_standing_post_textfield.setText(null);
             return false;
         }
 

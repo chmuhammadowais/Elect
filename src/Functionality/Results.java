@@ -68,7 +68,7 @@ public class Results implements ActionListener {
 
         compile_icon = new ImageIcon("compile.png");
         compile_btn = new JButton();
-        compile_btn.setText("Compiled ProgramClasses.Results");
+        compile_btn.setText("Compiled Results");
         compile_btn.setIcon(compile_icon);
         compile_btn.setFocusable(false);
         compile_btn.setContentAreaFilled(false);
@@ -83,7 +83,7 @@ public class Results implements ActionListener {
 
         detailed_btn = new JButton();
         detail_icon = new ImageIcon("details.png");
-        detailed_btn.setText("Detailed ProgramClasses.Results");
+        detailed_btn.setText("Detailed Results");
         detailed_btn.setIcon(detail_icon);
         detailed_btn.setFocusable(false);
         detailed_btn.setContentAreaFilled(false);
@@ -183,7 +183,7 @@ public class Results implements ActionListener {
 
 
         main_title = new JLabel();
-        main_title.setText("Elections ProgramClasses.Results");
+        main_title.setText("Elections Results");
         main_title.setFont(new Font("Calibri",Font.BOLD,20));
 //        main_title.setBorder(BorderFactory.createLineBorder(Color.red));
         main_title.setBounds(328,130,145,60);
@@ -233,7 +233,7 @@ public class Results implements ActionListener {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
-            String query = "select * from DetailedResult;";
+            String query = "select * from DetailedResult";
             try (java.sql.Statement stmt = con.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 int counter = 0;
@@ -243,16 +243,14 @@ public class Results implements ActionListener {
                     String Votes = rs.getString("Votes");
                     model.insertRow(counter,new Object[]{Candidate,Post,Votes});
                     counter++;
-
                 }
-                return true;
             } catch (SQLException ex) {
                 System.out.println("Exception : "+ex);
+                return false;
             }
-            return true;
         }     catch (SQLException | ClassNotFoundException ex) {
             System.out.println("Exception : "+ex);
-
+            return false;
         }
         df.add(info_panel);
         df.add(elect_heading);
@@ -260,7 +258,7 @@ public class Results implements ActionListener {
         df.add(upper_line);
         df.add(df_back);
         df.setVisible(true);
-        return false;
+        return true;
     }
 
     public boolean CompiledResults_call(){
@@ -275,7 +273,6 @@ public class Results implements ActionListener {
         icon = new ImageIcon("logo.png");
         df.setIconImage(icon.getImage());
 
-
         header_icon = new ImageIcon("heading.png");
         elect_heading = new JLabel();
         elect_heading.setText("Elect");
@@ -289,7 +286,7 @@ public class Results implements ActionListener {
 
 
         main_title = new JLabel();
-        main_title.setText("Elections ProgramClasses.Results");
+        main_title.setText("Elections Results");
         main_title.setFont(new Font("Calibri",Font.BOLD,20));
 //        main_title.setBorder(BorderFactory.createLineBorder(Color.red));
         main_title.setBounds(328,130,145,60);
@@ -350,13 +347,13 @@ public class Results implements ActionListener {
                     model.insertRow(counter,new Object[]{Candidate,Post,Votes});
                     counter++;
                 }
-                return true;
             } catch (SQLException ex) {
                 System.out.println("Exception : "+ex);
                 return false;
             }
         }     catch (SQLException | ClassNotFoundException ex) {
             System.out.println("Exception : "+ex);
+            return false;
         }
         df.add(info_panel);
 
@@ -365,6 +362,6 @@ public class Results implements ActionListener {
         df.add(upper_line);
         df.add(df_back);
         df.setVisible(true);
-        return false;
+        return true;
     }
 }
