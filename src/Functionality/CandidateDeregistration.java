@@ -317,7 +317,6 @@ public class CandidateDeregistration implements ActionListener {
     }
     public boolean dereg_conf_call(String id){
         try {
-
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
             System.out.println("Connection succeed");

@@ -27,5 +27,19 @@ class ResultsTest extends MainFrame {
         var ob = new Results();
         assertTrue(ob.CompiledResults_call());
     }
-
+    @Test
+    void flush_res(){
+        var ob = new Results();
+        assertTrue(ob.flush_res());
+    }
+    @Test
+    void confirmation_call(){
+        var ob = new Results();
+        assertTrue(ob.confirmation_call());
+    }
+    @Test
+    void cancel_call(){
+        var ob = new Results();
+        assertTrue(ob.cancel_call());
+    }
 }
