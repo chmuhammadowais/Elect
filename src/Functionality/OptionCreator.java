@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.LinkedList;
 
-public class OptionCreator implements ActionListener {
+public class OptionCreator implements ActionListener, Runnable {
     String post_to_retrieve;
     JLabel elect_heading;
     ImageIcon icon;
@@ -161,8 +161,7 @@ public class OptionCreator implements ActionListener {
                 ps.setInt(1,VoterID);
                 ps.setString(2,Candidate);
                 ps.executeUpdate();
-
-                notify_admin();
+                run();
             }   catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,"Vote already casted, cannot caste vote more than once.","Error casting vote",JOptionPane.ERROR_MESSAGE);
                 OptionCreator.frame.dispose();
@@ -186,7 +185,19 @@ public class OptionCreator implements ActionListener {
         }
         return false;
     }
-    public boolean notify_admin(){
+
+    public void sub_run(){
+        try{
+            System.out.println("Notification for : Vote cast");
+            System.out.println("User ID : "+VoterVerification.Voter_ID +" voted for "+btn_grp.getSelection().getActionCommand());
+        }
+        catch(Exception e){
+            System.out.println("Exception : "+e);
+        }
+    }
+
+    @Override
+    public void run() {
         try{
             LinkedList<String> admins = new LinkedList<>();
             Connection con;
@@ -203,32 +214,17 @@ public class OptionCreator implements ActionListener {
                 for (String ad : admins) {
                     System.out.println("-----------------------------------");
                     System.out.println("Administrator "+ad);
-                    update_admin();
+                    sub_run();
                     System.out.println("-----------------------------------");
                 }
-                return true;
+
             }   catch (SQLException ex) {
                 System.out.println("Exception : " + ex);
-                return false;
+
             }
         }
         catch(Exception ex){
             System.out.println("Exception : "+ex);
-            return false;
-        }
-    }
-    public boolean update_admin(){
-        if(btn_grp.getSelection() == null){
-            return true;
-        }
-        try{
-            System.out.println("Notification for : Vote cast");
-            System.out.println("User ID : "+VoterVerification.Voter_ID +" voted for "+btn_grp.getSelection().getActionCommand());
-            return true;
-        }
-        catch(Exception e){
-            System.out.println("Exception : "+e);
-            return false;
         }
     }
 }

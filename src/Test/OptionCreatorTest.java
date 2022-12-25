@@ -17,14 +17,4 @@ class OptionCreatorTest extends MainFrame {
         var ob = new OptionCreator("Head");
         assertTrue(ob.vote_call());
     }
-    @Test
-    void notify_admin(){
-        var ob = new OptionCreator("Head");
-        assertTrue(ob.notify_admin());
-    }
-    @Test
-    void update_admin(){
-        var ob = new OptionCreator("Head");
-        assertTrue(ob.update_admin());
-    }
 }
