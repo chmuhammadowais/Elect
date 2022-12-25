@@ -262,7 +262,7 @@ public class Results implements ActionListener {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
-            String query = "select * from DetailedResult";
+            String query = "select * from DetailedResults";
             try (java.sql.Statement stmt = con.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 int counter = 0;
@@ -488,7 +488,7 @@ public class Results implements ActionListener {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect","root","admin");
-            String query = "select * from DetailedResult where Votes = (select max(votes) from DetailedResult);";
+            String query = "select * from DetailedResults D where votes = (select max(votes) from  DetailedResults E where D.position=E.position);";
             try (java.sql.Statement stmt = con.createStatement()) {
                 ResultSet rs = stmt.executeQuery(query);
                 int counter = 0;

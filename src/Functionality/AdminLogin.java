@@ -188,11 +188,12 @@ public class AdminLogin  implements ActionListener {
                 String password = rs.getString("Password");
                 if(us.equals(username) && pw.equals(password)){
                     switch (this.provoke_type) {
-                        case "MainFrame":
+                        case "MainFrame" -> {
                             frame.dispose();
                             new MainFrame();
                             return true;
-                        case "verification":
+                        }
+                        case "verification" -> {
                             frame.dispose();
                             if (CastVote.frame != null) {
                                 CastVote.frame.dispose();
@@ -203,10 +204,10 @@ public class AdminLogin  implements ActionListener {
                                 new AdminSignupDelete();
                                 return true;
                             }
-                            break;
-                        case "test":
+                        }
+                        case "test" -> {
                             return true;
-
+                        }
                     }
                     frame.dispose();
                 }
