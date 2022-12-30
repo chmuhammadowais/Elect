@@ -29,6 +29,8 @@ public class AdminLogin  implements ActionListener {
     public AdminLogin(String provoke) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
@@ -197,7 +199,7 @@ public class AdminLogin  implements ActionListener {
                             frame.dispose();
                             if (CastVote.frame != null) {
                                 CastVote.frame.dispose();
-                                JOptionPane.showMessageDialog(null, "Voting Ended", "Operation successful", JOptionPane.INFORMATION_MESSAGE);
+                                Timeless.complete_frame();
                                 return true;
                             } else if (MainFrame.frame != null) {
                                 MainFrame.frame.dispose();

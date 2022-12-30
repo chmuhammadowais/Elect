@@ -22,6 +22,8 @@ public class ElectionFrame implements ActionListener {
     public ElectionFrame() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }

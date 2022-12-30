@@ -23,6 +23,8 @@ public class RegisteredCandidates implements ActionListener {
     public RegisteredCandidates(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
@@ -97,8 +99,6 @@ public class RegisteredCandidates implements ActionListener {
         sp.getViewport().setBackground(Color.white);
         sp.setBounds(0,0,600,200);
         info_panel.add(sp);
-
-        ////////////////////////////////////////////////////////////////////////
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

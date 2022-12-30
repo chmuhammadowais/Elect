@@ -22,4 +22,8 @@ class TimelessTest extends MainFrame {
         var ob = new Timeless();
         assertTrue(ob.back_call());
     }
+    @Test
+    void complete_frame(){
+        assertTrue(Timeless.complete_frame());
+    }
 }

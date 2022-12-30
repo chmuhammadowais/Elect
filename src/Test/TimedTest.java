@@ -3,8 +3,8 @@ package Test;
 import Functionality.MainFrame;
 import Functionality.Timed;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TimedTest extends MainFrame {
     @Test
@@ -15,7 +15,7 @@ class TimedTest extends MainFrame {
     @Test
     void setConf_set_time_call(){
         var ob = new Timed();
-        assertTrue(ob.setConf_set_time_call());
+        assertFalse(ob.setConf_set_time_call());
     }
     @Test
     void back_call(){
@@ -26,5 +26,10 @@ class TimedTest extends MainFrame {
     void set_time_call(){
         var ob = new Timed();
         assertTrue(ob.set_time_call());
+    }
+    @Test
+    void complete_frame(){
+        var ob = new Timed();
+        assertTrue(ob.complete_frame());
     }
 }

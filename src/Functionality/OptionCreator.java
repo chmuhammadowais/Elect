@@ -22,6 +22,9 @@ public class OptionCreator implements ActionListener, Runnable {
     public OptionCreator(String post_to_retrieve){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }

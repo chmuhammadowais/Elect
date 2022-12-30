@@ -33,6 +33,8 @@ public class Timed implements ActionListener {
     public Timed(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
@@ -161,99 +163,107 @@ public class Timed implements ActionListener {
         }
     }
     public boolean setConf_set_time_call(){
-        try{
-            System.out.println("Hour : "+hour_box.getSelectedItem()+" "+"Minutes : "+min_box.getSelectedItem());
-            int hour = Integer.parseInt((String) Objects.requireNonNull(hour_box.getSelectedItem()));
-            int minutes = Integer.parseInt((String) Objects.requireNonNull(min_box.getSelectedItem()));
-            int in_min = hour*60+minutes;
-            int in_sec =  in_min*60;
-            System.out.println("In Minutes : "+in_min);
-            System.out.println("In Seconds : "+in_sec);
+        System.out.println("Hour : "+hour_box.getSelectedItem()+" "+"Minutes : "+min_box.getSelectedItem());
+        int hour = Integer.parseInt((String) Objects.requireNonNull(hour_box.getSelectedItem()));
+        int minutes = Integer.parseInt((String) Objects.requireNonNull(min_box.getSelectedItem()));
+        int in_min = hour*60+minutes;
+        int in_sec =  in_min*60;
 
-            time_confirmation_frame = new JFrame();
-            time_confirmation_frame.setSize(400,200);
-            time_confirmation_frame.setLayout(null);
-            time_confirmation_frame.setIconImage(null);
-            time_confirmation_frame.setTitle("Time Confirmation Box");
-            time_confirmation_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            icon = new ImageIcon("./src/Resources/logo.png");
-            time_confirmation_frame.setIconImage(icon.getImage());
-            time_confirmation_frame.setLocationRelativeTo(null);
-
-            JLabel hour_label = new JLabel("Hours",SwingConstants.CENTER);
-            hour_label.setFont(new Font("Calibri",Font.BOLD,12));
-            // hour_label.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            hour_label.setBounds(95, 80, 100, 20);
-
-            JLabel hour_label_time = new JLabel((String) hour_box.getSelectedItem(),SwingConstants.CENTER);
-            hour_label_time.setFont(new Font("Calibri",Font.BOLD,50));
-            // hour_label_time.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            hour_label_time.setBounds(95, 20, 100, 60);
-
-            JLabel min_label = new JLabel("Minutes",SwingConstants.CENTER);
-            min_label.setFont(new Font("Calibri",Font.BOLD,12));
-            // min_label.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            min_label.setBounds(205, 80, 100, 20);
-
-            JLabel min_label_time = new JLabel((String) min_box.getSelectedItem(),SwingConstants.CENTER);
-            min_label_time.setFont(new Font("Calibri",Font.BOLD,50));
-            //  min_label_time.setBorder(BorderFactory.createLineBorder(Color.yellow));
-            min_label_time.setBounds(205, 20, 100, 60);
-
-            JLabel label_colon = new JLabel(":",SwingConstants.CENTER);
-            //  label_colon.setBorder(BorderFactory.createLineBorder(Color.red));
-            label_colon.setFont(new Font("Calibri",Font.BOLD,30));
-            label_colon.setBounds(195,20,10,60);
-
-            set_time_button = new JButton("Set Time");
-            set_time_button.setFocusable(false);
-            set_time_button.setContentAreaFilled(false);
-            set_time_button.setOpaque(false);
-            set_time_button.setFont(new Font("Calibri",Font.BOLD,17));
-            set_time_button.setBorder(new RoundedBorder(5));
-            set_time_button.addActionListener(this);
-            set_time_button.setBounds(100,120,200,30);
-
-
-            // ProgramClasses.CastVote.frame.add(button);
-            progressBar = new JProgressBar();
-            progressBar.setBounds(0,452,800,10);
-            ActionListener updateProBar = actionEvent -> {
-                int val = progressBar.getValue();
-                if (val >= 100) {
-                    timer.stop();
-                    JOptionPane.showMessageDialog(null,"Election Time ended.","Time up",JOptionPane.INFORMATION_MESSAGE);
-                    if(CastVote.frame != null){
-                        CastVote.frame.dispose();
-                    }
-                    return;
-                }
-                progressBar.setValue(++val);
-            };
-
-            timer = new Timer(in_sec*10, updateProBar);
-            set_time_button.addActionListener(e1 -> {
-                if (timer.isRunning()) {
-                    timer.stop();
-                } else  {
-                    timer.start();
-                }
-            });
-            time_confirmation_frame.add(set_time_button);
-            time_confirmation_frame.add(hour_label);
-            time_confirmation_frame.add(min_label);
-            time_confirmation_frame.add(hour_label_time);
-            time_confirmation_frame.add(min_label_time);
-            time_confirmation_frame.add(label_colon);
-            time_confirmation_frame.setVisible(true);
-
-            return true;
-        }
-        catch(Exception e){
-            System.out.println("Exception : "+e);
+       if(in_min == 0 && in_sec == 0){
+           JOptionPane.showMessageDialog(null,"Please choose a valid time duration.","Error setting time",JOptionPane.ERROR_MESSAGE);
             return false;
-        }
+       }
+       else{
+           try{
+               System.out.println("In Minutes : "+in_min);
+               System.out.println("In Seconds : "+in_sec);
 
+               time_confirmation_frame = new JFrame();
+               time_confirmation_frame.setSize(400,200);
+               time_confirmation_frame.setLayout(null);
+               time_confirmation_frame.getContentPane().setBackground(Color.white);
+               time_confirmation_frame.setIconImage(null);
+               time_confirmation_frame.setTitle("Time Confirmation Box");
+               time_confirmation_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+               icon = new ImageIcon("./src/Resources/logo.png");
+               time_confirmation_frame.setIconImage(icon.getImage());
+               time_confirmation_frame.setLocationRelativeTo(null);
+
+               JLabel hour_label = new JLabel("Hours",SwingConstants.CENTER);
+               hour_label.setFont(new Font("Calibri",Font.BOLD,12));
+               // hour_label.setBorder(BorderFactory.createLineBorder(Color.yellow));
+               hour_label.setBounds(95, 80, 100, 20);
+
+               JLabel hour_label_time = new JLabel((String) hour_box.getSelectedItem(),SwingConstants.CENTER);
+               hour_label_time.setFont(new Font("Calibri",Font.BOLD,50));
+               // hour_label_time.setBorder(BorderFactory.createLineBorder(Color.yellow));
+               hour_label_time.setBounds(95, 20, 100, 60);
+
+               JLabel min_label = new JLabel("Minutes",SwingConstants.CENTER);
+               min_label.setFont(new Font("Calibri",Font.BOLD,12));
+               // min_label.setBorder(BorderFactory.createLineBorder(Color.yellow));
+               min_label.setBounds(205, 80, 100, 20);
+
+               JLabel min_label_time = new JLabel((String) min_box.getSelectedItem(),SwingConstants.CENTER);
+               min_label_time.setFont(new Font("Calibri",Font.BOLD,50));
+               //  min_label_time.setBorder(BorderFactory.createLineBorder(Color.yellow));
+               min_label_time.setBounds(205, 20, 100, 60);
+
+               JLabel label_colon = new JLabel(":",SwingConstants.CENTER);
+               //  label_colon.setBorder(BorderFactory.createLineBorder(Color.red));
+               label_colon.setFont(new Font("Calibri",Font.BOLD,30));
+               label_colon.setBounds(195,20,10,60);
+
+               set_time_button = new JButton("Set Time");
+               set_time_button.setFocusable(false);
+               set_time_button.setContentAreaFilled(false);
+               set_time_button.setOpaque(false);
+               set_time_button.setFont(new Font("Calibri",Font.BOLD,17));
+               set_time_button.setBorder(new RoundedBorder(5));
+               set_time_button.addActionListener(this);
+               set_time_button.setBounds(100,120,200,30);
+
+
+               // ProgramClasses.CastVote.frame.add(button);
+               progressBar = new JProgressBar();
+               progressBar.setBounds(0,452,800,10);
+               ActionListener updateProBar = actionEvent -> {
+                   int val = progressBar.getValue();
+                   if (val >= 100) {
+                       timer.stop();
+//                       JOptionPane.showMessageDialog(null,"Election Time ended.","Time up",JOptionPane.INFORMATION_MESSAGE);
+                       complete_frame();
+                       if(CastVote.frame != null){
+                           CastVote.frame.dispose();
+                       }
+                       return;
+                   }
+                   progressBar.setValue(++val);
+               };
+
+               timer = new Timer(in_sec*10, updateProBar);
+               set_time_button.addActionListener(e1 -> {
+                   if (timer.isRunning()) {
+                       timer.stop();
+                   } else  {
+                       timer.start();
+                   }
+               });
+               time_confirmation_frame.add(set_time_button);
+               time_confirmation_frame.add(hour_label);
+               time_confirmation_frame.add(min_label);
+               time_confirmation_frame.add(hour_label_time);
+               time_confirmation_frame.add(min_label_time);
+               time_confirmation_frame.add(label_colon);
+               time_confirmation_frame.setVisible(true);
+
+               return true;
+           }
+           catch(Exception e){
+               System.out.println("Exception : "+e);
+               return false;
+           }
+       }
     }
     public boolean back_call(){
         try{
@@ -278,6 +288,46 @@ public class Timed implements ActionListener {
             return true;
         }
         catch(Exception e){
+            System.out.println("Exception : "+e);
+            return false;
+        }
+    }
+    public boolean complete_frame(){
+        try{
+            JFrame timesup_frame = new JFrame();
+            timesup_frame.setSize(400,200);
+            ImageIcon icon = new ImageIcon("./src/Resources/logo.png");
+            timesup_frame.setIconImage(icon.getImage());
+            timesup_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            timesup_frame.getContentPane().setBackground(Color.white);
+            timesup_frame.setLocationRelativeTo(null);
+            timesup_frame.setLayout(null);
+
+            ImageIcon image = new ImageIcon("./src/Resources/hourglass.png");
+
+            JLabel title = new JLabel();
+            title.setText("Times Up");
+//      title.setBorder(BorderFactory.createLineBorder(Color.red));
+            title.setFont(new Font("Calibri",Font.BOLD,25));
+            title.setIcon(image);
+            title.setIconTextGap(20);
+            title.setBounds(100,0,175,100);
+
+            JButton btn = new JButton();
+            btn.setText("OK");
+            btn.setFocusable(false);
+            btn.setContentAreaFilled(false);
+            btn.setOpaque(false);
+            btn.setFont(new Font("Calibri", Font.BOLD, 15));
+            btn.setBorder(new RoundedBorder(20));
+            btn.addActionListener(ae2 -> timesup_frame.dispose());
+            btn.setBounds(165,120,70,30);
+            timesup_frame.add(btn);
+            timesup_frame.add(title);
+            timesup_frame.setVisible(true);
+            return true;
+        }
+        catch (Exception e){
             System.out.println("Exception : "+e);
             return false;
         }

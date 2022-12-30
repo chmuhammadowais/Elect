@@ -1,8 +1,8 @@
 package Functionality;
 
+import java.io.IOException;
 public class Main {
-    public static void main(String[] args) {
-      new AdminLogin("MainFrame");
-
+    public static void main(String[] args) throws IOException {
+     new AdminLogin("MainFrame");
     }
 }

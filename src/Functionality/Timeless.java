@@ -23,6 +23,8 @@ public class Timeless implements ActionListener {
     public Timeless(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
@@ -144,4 +146,45 @@ public class Timeless implements ActionListener {
             return false;
         }
     }
+    public static boolean complete_frame(){
+        try{
+            JFrame timesup_frame = new JFrame();
+            timesup_frame.setSize(400,200);
+            ImageIcon icon = new ImageIcon("./src/Resources/logo.png");
+            timesup_frame.setIconImage(icon.getImage());
+            timesup_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            timesup_frame.getContentPane().setBackground(Color.white);
+            timesup_frame.setLocationRelativeTo(null);
+            timesup_frame.setLayout(null);
+
+            ImageIcon image = new ImageIcon("./src/Resources/complete.png");
+
+            JLabel title = new JLabel();
+            title.setText("Election Ended");
+//        title.setBorder(BorderFactory.createLineBorder(Color.red));
+            title.setFont(new Font("Calibri",Font.BOLD,25));
+            title.setIcon(image);
+            title.setIconTextGap(20);
+            title.setBounds(60,0,280,100);
+
+            JButton btn = new JButton();
+            btn.setText("OK");
+            btn.setFocusable(false);
+            btn.setContentAreaFilled(false);
+            btn.setOpaque(false);
+            btn.setFont(new Font("Calibri", Font.BOLD, 15));
+            btn.setBorder(new RoundedBorder(20));
+            btn.addActionListener(ae2 -> timesup_frame.dispose());
+            btn.setBounds(165,120,70,30);
+            timesup_frame.add(btn);
+            timesup_frame.add(title);
+            timesup_frame.setVisible(true);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("Exception : "+e);
+        }
+        return false;
+    }
+
 }

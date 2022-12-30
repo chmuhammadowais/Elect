@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class CastVote implements ActionListener {
     String implementation_type;
@@ -18,10 +19,13 @@ public class CastVote implements ActionListener {
     JButton cast_btn;
     static JFrame frame;
     JButton end_btn;
-
+    JButton helpdesk;
+    ImageIcon helpdesk_icon;
     public CastVote(String implementation_type){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.background", Color.white);
+            UIManager.put("Panel.background", Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             System.out.println("Exception : "+ex);
         }
@@ -82,6 +86,16 @@ public class CastVote implements ActionListener {
         cast_btn.setBorder(new RoundedBorder(20));
         cast_btn.addActionListener(this);
 
+        helpdesk_icon = new ImageIcon("./src/Resources/help-icon.png");
+        helpdesk = new JButton();
+        helpdesk.setIcon(helpdesk_icon);
+        helpdesk.setFocusable(false);
+        helpdesk.setContentAreaFilled(false);
+        helpdesk.setOpaque(false);
+        helpdesk.addActionListener(this);
+        helpdesk.setBounds(700,400,48,30);
+
+
         if(implementation_type.equals("Timeless")){
             end_btn = new JButton();
             end_btn.setText("End");
@@ -101,6 +115,7 @@ public class CastVote implements ActionListener {
         frame.add(upper_line);
         frame.add(pic_panel);
         frame.add(cast_btn);
+        frame.add(helpdesk);
         frame.setVisible(true);
     }
 
@@ -111,6 +126,14 @@ public class CastVote implements ActionListener {
         }
         else if (e.getSource() == end_btn) {
            end_call();
+        } else if (e.getSource() == helpdesk) {
+            System.out.println("Calling helpdesk");
+            try {
+                new HelpDesk();
+            } catch (IOException ex) {
+                System.out.println("Exception while calling Help Desk");
+                JOptionPane.showMessageDialog(null,"We're Sorry Help Desk is currently unavailable.","Error retrieving help",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     public boolean cast_call(){
