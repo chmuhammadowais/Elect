@@ -15,17 +15,17 @@ public class Server {
         server_call(6856);
     }
     public static boolean server_call(int port) throws IOException {
-        if(port == 0){
+        if (port == 0) {
             return true;
         }
         System.out.println("Server Started");
-        Socket socket ;
-        InputStreamReader inputStreamReader ;
-        OutputStreamWriter outputStreamWriter ;
-        BufferedReader bufferedReader ;
-        BufferedWriter bufferedWriter ;
-        ServerSocket serversocket ;
-        String answer = "";
+        Socket socket;
+        InputStreamReader inputStreamReader;
+        OutputStreamWriter outputStreamWriter;
+        BufferedReader bufferedReader;
+        BufferedWriter bufferedWriter;
+        ServerSocket serversocket;
+        String answer;
         serversocket = new ServerSocket(port);
 
         while (true) {
@@ -42,22 +42,21 @@ public class Server {
                 String msgFromClient = bufferedReader.readLine();
                 System.out.println("Client: " + msgFromClient);
 
-                try{
+                try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Elect", "root", "admin");
                     PreparedStatement ps = con.prepareStatement("select answer from helpdesk where question=?");
 
-                    ps.setString(1,msgFromClient);
+                    ps.setString(1, msgFromClient);
 
                     ResultSet rs = ps.executeQuery();
                     rs.next();
                     answer = rs.getString("answer");
-                }
-                catch(Exception e){
-                    System.out.println("Exception : "+e);
+                } catch (Exception e) {
+                    System.out.println("Exception : " + e);
                     return false;
                 }
-                bufferedWriter.write("Request Received : "+ answer);
+                bufferedWriter.write("Request Received : " + answer);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
 
@@ -66,10 +65,13 @@ public class Server {
                 outputStreamWriter.close();
                 bufferedReader.close();
                 bufferedWriter.close();
-                return true;
 
+
+                if (msgFromClient.equalsIgnoreCase("BYE")){
+                    return true;
+            }
             } catch (IOException e) {
-                System.out.println("Exception : "+e);
+                System.out.println("Exception : " + e);
                 return false;
             }
         }

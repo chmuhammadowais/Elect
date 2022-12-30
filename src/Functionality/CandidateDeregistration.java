@@ -305,11 +305,8 @@ public class CandidateDeregistration implements ActionListener {
         try{
             if(confirmation_frame != null){
             confirmation_frame.dispose();
+            }
             return true;
-            }
-            else{
-                return true;
-            }
         }
         catch(Exception e){
             System.out.println("Exception : "+e);

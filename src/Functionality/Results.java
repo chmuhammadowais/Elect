@@ -152,10 +152,10 @@ public class Results implements ActionListener {
             cancel_call();
         }
         else if(e.getSource()==confirm_btn){
-            if(records_no == "0" || records_no=="00"){
+            if(Integer.parseInt(records_no) != 0){
                 confirmation_call();
             }
-            else{
+            else if(Integer.parseInt(records_no) == 0){
                 secondary_frame.dispose();
                 JOptionPane.showMessageDialog(null,"There exist no data to wipe.","Error",JOptionPane.ERROR_MESSAGE);
             }
